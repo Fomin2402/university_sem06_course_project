@@ -2,8 +2,12 @@
   "name": "book-store-backend",
   "version": "1.0.0",
   "description": "My course project",
-  "main": "index.js",
+  "main": "dist/app.js",
   "scripts": {
+    "start": "node dist/app.js",
+    "compile": "tsc",
+    "start-and-compile": "tsc && node dist/app.js",
+    "dev": "./node_modules/nodemon/bin/nodemon.js -e ts  --exec \"npm run start-and-compile\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,7 +21,12 @@
   },
   "homepage": "https://github.com/Fomin2402/book-store#readme",
   "devDependencies": {
+    "@types/express": "^4.17.6",
+    "nodemon": "^2.0.4",
     "tslint": "^6.1.2",
     "typescript": "^3.9.2"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
