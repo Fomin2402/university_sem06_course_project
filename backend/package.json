@@ -1,0 +1,23 @@
+{
+  "name": "book-store-backend",
+  "version": "1.0.0",
+  "description": "My course project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fomin2402/book-store.git"
+  },
+  "author": "Alex Fomin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Fomin2402/book-store/issues"
+  },
+  "homepage": "https://github.com/Fomin2402/book-store#readme",
+  "devDependencies": {
+    "tslint": "^6.1.2",
+    "typescript": "^3.9.2"
+  }
+}
