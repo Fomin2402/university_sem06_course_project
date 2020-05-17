@@ -1,6 +1,10 @@
 import { Express, RequestHandler } from 'express';
 
 // TODO: add cursor pagination!!!
+// TODO: added roles to users
+// TODO: added search to main page for products
+// TODO: added roles for products
+// TODO: added rating to products
 
 import MongoDBStoreConnect from 'connect-mongodb-session';
 import bodyParser from 'body-parser';
