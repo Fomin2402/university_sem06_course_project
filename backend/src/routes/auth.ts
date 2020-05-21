@@ -1,4 +1,4 @@
-import { check, body } from'express-validator/check';
+import { check, body } from'express-validator';
 import express from'express';
 
 import * as authController from'../controllers/auth';

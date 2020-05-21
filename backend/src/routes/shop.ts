@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
 
-import * as shopController from'../controllers/shop';
-import isAuth from'../middleware/is-auth';
+import * as shopController from '../controllers/shop';
+import isAuth from '../middleware/is-auth';
 
 const router: Router = express.Router();
 
@@ -15,7 +15,9 @@ router.post('/cart', isAuth, shopController.postCart);
 
 router.post('/cart-delete-item', isAuth, shopController.postCartDeleteProduct);
 
-router.get('/checkout', isAuth, shopController.getCheckout);
+// router.get('/checkout', isAuth, shopController.getCheckout);
+
+router.get('/checkout', shopController.getCheckout);
 
 router.get('/checkout/success', shopController.getCheckoutSuccess);
 
