@@ -1,7 +1,7 @@
 import express, { Router } from 'express';
 
 import * as shopController from '../controllers/shop';
-import isAuth from '../middleware/is-auth';
+import { isAuth } from '../middleware/is-auth';
 
 const router: Router = express.Router();
 

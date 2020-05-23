@@ -5,7 +5,7 @@ interface ICheckParam {
     errorCode?: number;
 }
 
-export function check({
+export function customCheck({
     check,
     errorMessage,
     errorCode = 401,

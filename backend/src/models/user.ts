@@ -1,5 +1,18 @@
 import mongoose, { Schema } from 'mongoose';
 
+export interface ICart {
+    items: any[];
+}
+
+export interface IUser extends mongoose.Document {
+    email: string;
+    password: string;
+    isAdmin?: boolean;
+    resetToken?: string;
+    resetTokenExpiration?: Date | any;
+    cart?: ICart;
+}
+
 const userSchema = new Schema({
     email: {
         type: String,
@@ -9,6 +22,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    isAdmin: Boolean,
     resetToken: String,
     resetTokenExpiration: Date,
     cart: {
@@ -61,4 +75,4 @@ userSchema.methods.clearCart = function () {
     return this.save();
 };
 
-export = mongoose.model('User', userSchema);
+export const User = mongoose.model('User', userSchema);

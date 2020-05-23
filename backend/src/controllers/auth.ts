@@ -6,8 +6,8 @@ import crypto from 'crypto';
 
 import * as config from '../../../global/env.json';
 import { sendMail } from '../utils/transporter';
-import { check } from '../utils/check';
-import User from '../models/user';
+import { customCheck } from '../utils/check';
+import { User, IUser } from '../models/user';
 
 export const postSignup = (
     req: Request<any>,
@@ -15,7 +15,7 @@ export const postSignup = (
     next: NextFunction
 ) => {
     const errors: Result<ValidationError> = validationResult(req);
-    check({
+    customCheck({
         check: errors.isEmpty(),
         errorMessage: 'Validation failed.',
         errorCode: 422,
@@ -59,7 +59,7 @@ export const postLogin = (
     next: NextFunction
 ) => {
     const errors: Result<ValidationError> = validationResult(req);
-    check({
+    customCheck({
         check: errors.isEmpty(),
         errorMessage: 'Validation failed.',
         errorCode: 422,
@@ -68,11 +68,11 @@ export const postLogin = (
 
     const email: string = req.body.email;
     const password: string = req.body.password;
-    let loadedUser: any;
+    let loadedUser: IUser;
 
     User.findOne({ email })
-        .then((user: any) => {
-            check({
+        .then((user: IUser) => {
+            customCheck({
                 check: !!user,
                 errorMessage: 'A user with this email could not be found.',
             });
@@ -80,7 +80,7 @@ export const postLogin = (
             return bcrypt.compare(password, user.password);
         })
         .then((isEqual: boolean) => {
-            check({
+            customCheck({
                 check: isEqual,
                 errorMessage: 'Wrong password.',
             });
@@ -88,6 +88,7 @@ export const postLogin = (
                 {
                     email: loadedUser.email,
                     userId: loadedUser._id.toString(),
+                    isAdmin: loadedUser.isAdmin,
                 },
                 config.backend.jwt.jsonwebtoken,
                 { expiresIn: config.backend.jwt.expiresIn }
@@ -119,8 +120,8 @@ export const postReqForReset = (
         }
         const token = buffer.toString('hex');
         User.findOne({ email: req.body.email })
-            .then((user: any) => {
-                check({
+            .then((user: IUser) => {
+                customCheck({
                     check: !!user,
                     errorMessage: 'A user with this email could not be found.',
                 });
@@ -160,8 +161,11 @@ export const postResetPassword = (
         resetToken,
         resetTokenExpiration: { $gt: Date.now() },
     })
-        .then((user: any) => {
-            check({ check: !!user, errorMessage: 'Invalid reset tokens' });
+        .then((user: IUser) => {
+            customCheck({
+                check: !!user,
+                errorMessage: 'Invalid reset tokens',
+            });
             resetUser = user;
             return bcrypt.hash(newPassword, 12);
         })

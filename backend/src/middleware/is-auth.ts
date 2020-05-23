@@ -3,7 +3,11 @@ import jwt from 'jsonwebtoken';
 
 import * as config from '../../../global/env.json';
 
-export = (req: Request<any>, res: Response<any>, next: NextFunction) => {
+export const isAuth = (
+    req: Request<any>,
+    res: Response<any>,
+    next: NextFunction
+) => {
     const authHeader: string | undefined = req.get('Authorization');
 
     if (!authHeader) {
@@ -26,5 +30,6 @@ export = (req: Request<any>, res: Response<any>, next: NextFunction) => {
         throw error;
     }
     (req as any).userId = decodedToken.userId;
+    (req as any).isAdmin = decodedToken.isAdmin;
     next();
 };

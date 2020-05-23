@@ -18,7 +18,6 @@ import adminRoutes from './routes/admin';
 import shopRoutes from './routes/shop';
 import authRoutes from './routes/auth';
 
-import User from './models/user';
 import rootDir from './utils/path';
 
 const MONGODB_URI: string = config.atlas.connection;

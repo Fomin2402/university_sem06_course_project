@@ -1,7 +1,43 @@
-import { validationResult } from 'express-validator';
+import { validationResult, Result, ValidationError } from 'express-validator';
+import { NextFunction, Request, Response } from 'express';
 
 import * as fileHelper from '../utils/file';
+import { customCheck } from '../utils/check';
 import Product from '../models/product';
+import { User, IUser } from '../models/user';
+
+export const postGrantRole = (
+    req: Request<any>,
+    res: Response<any>,
+    next: NextFunction
+) => {
+    const errors: Result<ValidationError> = validationResult(req);
+    customCheck({
+        check: errors.isEmpty(),
+        errorMessage: 'Validation failed.',
+        errorCode: 422,
+        data: errors.array(),
+    });
+
+    const userId: string = req.params.userId;
+
+    User.findById(userId)
+        .then((user: IUser) => {
+            customCheck({
+                check: !!user,
+                errorMessage: 'A user with this id could not be found.',
+            });
+
+            (user as any).isAdmin = true;
+            return user.save();
+        })
+        .then((result) => {
+            res.status(201).json({
+                message: 'User has been granted as admin.',
+                userId,
+            });
+        });
+};
 
 export const postAddProduct = (req, res, next) => {
     const title = req.body.title;

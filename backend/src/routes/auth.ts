@@ -2,7 +2,7 @@ import { check, body } from 'express-validator';
 import express from 'express';
 
 import * as authController from '../controllers/auth';
-import User from '../models/user';
+import { User, IUser } from '../models/user';
 
 const MIN_PASS_LENGTH: number = 5;
 
@@ -30,12 +30,8 @@ router.post(
             .isEmail()
             .withMessage('Please enter a valid email.')
             .custom((value, { req }) => {
-                // if (value === 'test@test.com') {
-                //   throw new Error('This email address if forbidden.');
-                // }
-                // return true;
-                return User.findOne({ email: value }).then((userDoc) => {
-                    if (userDoc) {
+                return User.findOne({ email: value }).then((user: IUser) => {
+                    if (user) {
                         return Promise.reject(
                             'E-Mail exists already, please pick a different one.'
                         );
