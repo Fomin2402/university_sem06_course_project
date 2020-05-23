@@ -8,8 +8,6 @@ export const isAdmin = (
     next: NextFunction
 ) => {
     const isAdmin: boolean = (req as any).isAdmin;
-    console.log('isAdmin');
-    console.log(isAdmin);
 
     customCheck({
         check: isAdmin,

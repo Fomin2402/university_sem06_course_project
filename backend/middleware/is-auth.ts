@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 
-import * as config from '../../../global/env.json';
+import * as config from '../../global/env.json';
 
 export const isAuth = (
     req: Request<any>,

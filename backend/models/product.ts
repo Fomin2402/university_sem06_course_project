@@ -4,7 +4,7 @@ export interface IProduct extends mongoose.Document {
     title: string;
     price: number;
     description: string;
-    imageUrl: string;
+    imageUrl?: string;
     userId: string;
 }
 
@@ -23,7 +23,7 @@ const productSchema = new Schema({
     },
     imageUrl: {
         type: String,
-        required: true,
+        required: false,
     },
     userId: {
         type: Schema.Types.ObjectId,

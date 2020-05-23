@@ -1,8 +1,5 @@
-
 // TODO: add cursor pagination!!!
-// TODO: added roles to users
 // TODO: added search to main page for products
-// TODO: added roles for products
 // TODO: added rating to products
 
 import bodyParser from 'body-parser';
@@ -12,11 +9,14 @@ import express from 'express';
 import multer from 'multer';
 import path from 'path';
 
-import * as config from '../../global/env.json';
+import * as config from '../global/env.json';
 
-import adminRoutes from './routes/admin';
-import shopRoutes from './routes/shop';
 import authRoutes from './routes/auth';
+import adminRoutes from './routes/admin';
+import producRoutes from './routes/product';
+
+// TODO: old route
+import shopRoutes from './routes/shop';
 
 import rootDir from './utils/path';
 
@@ -24,18 +24,13 @@ const MONGODB_URI: string = config.atlas.connection;
 
 const app: Express = express();
 
-const pathToImagesDestination: string = path.join(
-    rootDir,
-    'images'
-);
-
 const fileStorage = multer.diskStorage({
     destination: (
         req: Express.Request,
         file: Express.Multer.File,
         cb: (error: Error | null, destination: string) => void
     ) => {
-        cb(null, pathToImagesDestination);
+        cb(null, 'images');
     },
     filename: (
         req: Express.Request,
@@ -70,7 +65,7 @@ app.use(bodyParser.json());
 app.use(multer({ storage: fileStorage, fileFilter }).single('image'));
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/images', express.static(pathToImagesDestination));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -89,9 +84,12 @@ app.use('/blablabla', (req, res, next) => {
     res.end('blablabla');
 });
 
-app.use('/admin', adminRoutes);
-app.use(shopRoutes);
 app.use(authRoutes);
+app.use('/admin', adminRoutes);
+app.use('/product', producRoutes);
+
+// TODO: old route
+app.use(shopRoutes);
 
 app.use((error, req, res, next) => {
     console.log(error);
@@ -105,6 +103,7 @@ mongoose
     .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((result) => {
         app.listen(config.backend.port);
+        console.log(`App is running: http://localhost:${config.backend.port}/`);
     })
     .catch((err) => {
         console.log(err);

@@ -1,8 +1,19 @@
+import { Result, ValidationError } from 'express-validator';
+
 interface ICheckParam {
     check: boolean | (() => boolean);
     errorMessage: string;
     data?: any;
     errorCode?: number;
+}
+
+export function checkValidationResult(errors: Result<ValidationError>): void {
+    customCheck({
+        check: errors.isEmpty(),
+        errorMessage: errors.array()[0]?.msg,
+        data: errors.array(),
+        errorCode: 422,
+    });
 }
 
 export function customCheck({

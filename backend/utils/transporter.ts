@@ -1,6 +1,6 @@
 import { createTransport, SentMessageInfo } from 'nodemailer';
 
-import * as config from '../../../global/env.json';
+import * as config from '../../global/env.json';
 import Mail from 'nodemailer/lib/mailer';
 
 interface ISendEmailParams {
@@ -11,9 +11,6 @@ interface ISendEmailParams {
 
 const nodemailerOptions: any = config.backend.nodemailer;
 const user: string = config.backend.nodemailer.auth.user;
-
-console.log('nodemailerOptions:');
-console.log(nodemailerOptions);
 
 const transporter: Mail = createTransport(nodemailerOptions);
 

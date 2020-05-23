@@ -1,50 +1,16 @@
-import { validationResult, Result, ValidationError } from 'express-validator';
 import { NextFunction, Request, Response } from 'express';
+import { validationResult } from 'express-validator';
 
 import * as fileHelper from '../utils/file';
-import { customCheck } from '../utils/check';
+import { customCheck, checkValidationResult } from '../utils/check';
 import { Product, IProduct } from '../models/product';
-import { User, IUser } from '../models/user';
 
-export const postGrantRole = (
+export const postProduct = (
     req: Request<any>,
     res: Response<any>,
     next: NextFunction
 ) => {
-    const errors: Result<ValidationError> = validationResult(req);
-    customCheck({
-        check: errors.isEmpty(),
-        errorMessage: 'Validation failed.',
-        errorCode: 422,
-        data: errors.array(),
-    });
-
-    const userId: string = req.params.userId;
-
-    User.findById(userId)
-        .then((user: IUser) => {
-            customCheck({
-                check: !!user,
-                errorMessage: 'A user with this id could not be found.',
-            });
-
-            (user as any).isAdmin = true;
-            return user.save();
-        })
-        .then((result) => {
-            res.status(201).json({
-                message: 'User has been granted as admin.',
-                userId,
-            });
-        });
-};
-
-export const postAddProduct = (
-    req: Request<any>,
-    res: Response<any>,
-    next: NextFunction
-) => {
-    const errors = validationResult(req);
+    checkValidationResult(validationResult(req));
 
     const title: string = req.body.title;
     const price: number = +req.body.price;
@@ -54,13 +20,6 @@ export const postAddProduct = (
     customCheck({
         check: !!image,
         errorMessage: 'Attached file is not an image.',
-        errorCode: 422,
-    });
-
-    customCheck({
-        check: errors.isEmpty(),
-        errorMessage: errors.array()[0]?.msg,
-        data: errors.array(),
         errorCode: 422,
     });
 
@@ -115,45 +74,56 @@ export const getEditProduct = (
         });
 };
 
-// TODO: udpate later
-export const postEditProduct = (
+export const patchProduct = (
     req: Request<any>,
     res: Response<any>,
     next: NextFunction
 ) => {
-    const prodId = req.body.productId;
-    const updatedTitle = req.body.title;
-    const updatedPrice = req.body.price;
-    const image = req.file;
-    const updatedDesc = req.body.description;
+    checkValidationResult(validationResult(req));
 
-    const errors = validationResult(req);
+    const prodId: string = req.params.productId;
 
-    if (!errors.isEmpty()) {
-        return res.status(422).json({
-            errorMessage: errors.array()[0]?.msg,
-            validationErrors: errors.array(),
-        });
-    }
+    const updatedTitle: string = req.body.title;
+    const updatedPrice: number = req.body.price;
+    const updatedDesc: string = req.body.description;
+    const image = req.file || req.body.removeImage;
+
+    console.log('prodId');
+    console.log(prodId);
 
     Product.findById(prodId)
-        .then((product: any) => {
-            if (
-                product.userId.toString() !== (req as any).user._id.toString()
-            ) {
-                // TODO: check status code here
-                return res.status(201).end();
-            }
+        .then((product: IProduct) => {
+            customCheck({
+                check: !!product,
+                errorMessage: 'A product with this id could not be found.',
+                errorCode: 404,
+            });
+
             product.title = updatedTitle;
             product.price = updatedPrice;
             product.description = updatedDesc;
-            if (image) {
-                fileHelper.deleteFile(product.imageUrl);
-                product.imageUrl = image.path;
+
+            console.log('image');
+            console.log(image);
+
+            if (image || typeof image === 'string') {
+                const currentImage: string | undefined = product.imageUrl;
+
+                if (currentImage) {
+                    fileHelper.deleteFile(product.imageUrl);
+                }
+
+                if (image && image.path) {
+                    product.imageUrl = image.path;
+                } else {
+                    product.imageUrl = undefined;
+                }
             }
-            return product.save().then((result) => {
-                res.json({ result });
-            });
+
+            return product.save();
+        })
+        .then((product: IProduct) => {
+            return res.json(product);
         })
         .catch((err) => {
             const error = new Error(err);

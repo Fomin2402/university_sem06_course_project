@@ -1,15 +1,24 @@
 {
     "compilerOptions": {
+        "target": "es5",
         "module": "commonjs",
-        "esModuleInterop": true,
-        "target": "es6",
         "moduleResolution": "node",
-        "baseUrl": "./backend",
-        "outDir": "dist",
         "sourceMap": true,
-        "typeRoots": ["node_modules/@types"],
-        "resolveJsonModule": true
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "removeComments": true,
+        "rootDir": "src",
     },
+    "files": ["app.ts"],
     "lib": ["es2015"],
-    "include": ["src/**/*"]
+    "exclude": [
+        ".idea",
+        ".vscode",
+        "build",
+        "node_modules",
+        "typings/globals",
+        "typings/modules"
+    ]
 }

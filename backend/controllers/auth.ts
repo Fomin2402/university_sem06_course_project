@@ -1,12 +1,12 @@
-import { validationResult, Result, ValidationError } from 'express-validator';
 import { NextFunction, Request, Response } from 'express';
+import { validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 
-import * as config from '../../../global/env.json';
+import { customCheck, checkValidationResult } from '../utils/check';
+import * as config from '../../global/env.json';
 import { sendMail } from '../utils/transporter';
-import { customCheck } from '../utils/check';
 import { User, IUser } from '../models/user';
 
 export const postSignup = (
@@ -14,13 +14,7 @@ export const postSignup = (
     res: Response<any>,
     next: NextFunction
 ) => {
-    const errors: Result<ValidationError> = validationResult(req);
-    customCheck({
-        check: errors.isEmpty(),
-        errorMessage: 'Validation failed.',
-        errorCode: 422,
-        data: errors.array(),
-    });
+    checkValidationResult(validationResult(req));
 
     const email: string = req.body.email;
     const password: string = req.body.password;
@@ -58,13 +52,7 @@ export const postLogin = (
     res: Response<any>,
     next: NextFunction
 ) => {
-    const errors: Result<ValidationError> = validationResult(req);
-    customCheck({
-        check: errors.isEmpty(),
-        errorMessage: 'Validation failed.',
-        errorCode: 422,
-        data: errors.array(),
-    });
+    checkValidationResult(validationResult(req));
 
     const email: string = req.body.email;
     const password: string = req.body.password;
@@ -75,6 +63,7 @@ export const postLogin = (
             customCheck({
                 check: !!user,
                 errorMessage: 'A user with this email could not be found.',
+                errorCode: 404
             });
             loadedUser = user;
             return bcrypt.compare(password, user.password);
@@ -124,6 +113,7 @@ export const postReqForReset = (
                 customCheck({
                     check: !!user,
                     errorMessage: 'A user with this email could not be found.',
+                    errorCode: 404
                 });
                 user.resetToken = token;
                 user.resetTokenExpiration = Date.now() + 300000;

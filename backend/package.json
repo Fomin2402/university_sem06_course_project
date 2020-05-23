@@ -2,11 +2,11 @@
     "name": "book-store-backend",
     "version": "1.0.0",
     "description": "My course project",
-    "main": "dist/backend/src/app.js",
+    "main": "./app.js",
     "scripts": {
-        "start": "node --trace-warnings dist/backend/src/app.js",
+        "start": "node --trace-warnings ./app.js",
         "compile": "tsc",
-        "start-and-compile": "tsc && node dist/backend/src/app.js",
+        "start-and-compile": "tsc && node ./app.js",
         "dev": "./node_modules/nodemon/bin/nodemon.js -e ts --exec \"npm run start-and-compile\"",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -26,6 +26,7 @@
         "@types/express-session": "^1.17.0",
         "@types/mongoose": "^5.7.20",
         "nodemon": "^2.0.4",
+        "ts-node": "^8.10.1",
         "tslint": "^6.1.2",
         "typescript": "^3.9.2"
     },
