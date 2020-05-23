@@ -1,125 +1,142 @@
-import { validationResult } from 'express-validator';
+import { validationResult, Result, ValidationError } from 'express-validator';
+import { NextFunction, Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 
-import User from '../models/user';
+import * as config from '../../../global/env.json';
 import { sendMail } from '../utils/transporter';
+import User from '../models/user';
 
-export const postLogin = (req, res, next) => {
-    const email = req.body.email;
-    const password = req.body.password;
-
-    const errors = validationResult(req);
+export const postSignup = (
+    req: Request<any>,
+    res: Response<any>,
+    next: NextFunction
+) => {
+    const errors: Result<ValidationError> = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(422).json({
-            errorMessage: errors.array()[0].msg,
-            validationErrors: errors.array(),
-        });
+        const error = new Error('Validation failed.');
+        (error as any).statusCode = 422;
+        (error as any).data = errors.array();
+        throw error;
     }
 
-    User.findOne({ email })
-        .then((user: any) => {
-            if (!user) {
-                return res.status(422).json({
-                    errorMessage: 'Invalid email or password.',
-                    validationErrors: [],
-                });
-            }
-            bcrypt
-                .compare(password, user.password)
-                .then((doMatch) => {
-                    if (doMatch) {
-                        req.session.isLoggedIn = true;
-                        req.session.user = user;
-                        return req.session.save((err) => {
-                            console.log(err);
-                            res.redirect('/');
-                        });
-                    }
-                    return res.status(422).json({
-                        errorMessage: 'Invalid email or password.',
-                        validationErrors: [],
-                    });
-                })
-                .catch((err) => {
-                    console.log(err);
-                    res.redirect('/login');
-                });
-        })
-        .catch((err) => {
-            const error = new Error(err);
-            (error as any).httpStatusCode = 500;
-            return next(error);
-        });
-};
-
-export const postSignup = (req, res, next) => {
-    console.log('postSignup');
-
-    const email = req.body.email;
-    const password = req.body.password;
-
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        console.log(errors.array());
-        return res.status(422).json({
-            errorMessage: errors.array()[0].msg,
-            validationErrors: errors.array(),
-        });
-    }
+    const email: string = req.body.email;
+    const password: string = req.body.password;
 
     bcrypt
         .hash(password, 12)
-        .then((hashedPassword) => {
+        .then((hashedPw) => {
             const user = new User({
-                email,
-                password: hashedPassword,
-                cart: { items: [] },
+                email: email,
+                password: hashedPw,
             });
             return user.save();
         })
         .then((result) => {
-            res.status(201).end();
+            res.status(201).json({
+                message: 'User created!',
+                userId: result._id,
+            });
             return sendMail({
                 to: email,
                 subject: 'Signup succeeded!',
                 template: '<h1>You successfully signed up!</h1>',
             });
         })
-        .catch((err) => {
-            const error = new Error(err);
-            (error as any).httpStatusCode = 500;
-            return next(error);
+        .catch((err: any) => {
+            if (!err.statusCode) {
+                err.statusCode = 500;
+            }
+            next(err);
         });
 };
 
-// TODO: update later
-export const postLogout = (req, res, next) => {
-    req.session.destroy((err) => {
-        console.log(err);
-        res.redirect('/');
-    });
+export const postLogin = (
+    req: Request<any>,
+    res: Response<any>,
+    next: NextFunction
+) => {
+    const errors: Result<ValidationError> = validationResult(req);
+    if (!errors.isEmpty()) {
+        const error = new Error('Validation failed.');
+        (error as any).statusCode = 422;
+        (error as any).data = errors.array();
+        throw error;
+    }
+
+    const email: string = req.body.email;
+    const password: string = req.body.password;
+    let loadedUser: any;
+
+    User.findOne({ email })
+        .then((user: any) => {
+            if (!user) {
+                const error = new Error(
+                    'A user with this email could not be found.'
+                );
+                (error as any).statusCode = 401;
+                throw error;
+            }
+            loadedUser = user;
+            return bcrypt.compare(password, user.password);
+        })
+        .then((isEqual: boolean) => {
+            if (!isEqual) {
+                const error = new Error('Wrong password!');
+                (error as any).statusCode = 401;
+                throw error;
+            }
+            const token: string = jwt.sign(
+                {
+                    email: loadedUser.email,
+                    userId: loadedUser._id.toString(),
+                },
+                config.backend.jwt.jsonwebtoken,
+                { expiresIn: config.backend.jwt.expiresIn }
+            );
+            res.status(200).json({
+                token: token,
+                userId: loadedUser._id.toString(),
+            });
+        })
+        .catch((err) => {
+            if (!err.statusCode) {
+                err.statusCode = 500;
+            }
+            next(err);
+        });
 };
 
-export const postReset = (req, res, next) => {
+// TODO: UPDATE
+export const postReqForReset = (
+    req: Request<any>,
+    res: Response<any>,
+    next: NextFunction
+) => {
     crypto.randomBytes(32, (err, buffer) => {
         if (err) {
             console.log(err);
-            return res.redirect('/reset');
+            const error = new Error(err as any);
+            (error as any).httpStatusCode = 500;
+            throw error;
         }
         const token = buffer.toString('hex');
         User.findOne({ email: req.body.email })
             .then((user: any) => {
                 if (!user) {
-                    req.flash('error', 'No account with that email found.');
-                    return res.redirect('/reset');
+                    const error = new Error(
+                        'A user with this email could not be found.'
+                    );
+                    (error as any).statusCode = 401;
+                    throw error;
                 }
                 user.resetToken = token;
-                user.resetTokenExpiration = Date.now() + 3600000;
+                user.resetTokenExpiration = Date.now() + 300000;
                 return user.save();
             })
             .then((result) => {
-                res.redirect('/');
+                res.status(201).end();
                 sendMail({
                     to: req.body.email,
                     subject: 'Password reset',
@@ -137,16 +154,19 @@ export const postReset = (req, res, next) => {
     });
 };
 
-export const postNewPassword = (req, res, next) => {
+// TODO: UPDATE
+export const postResetPassword = (
+    req: Request<any>,
+    res: Response<any>,
+    next: NextFunction
+) => {
     const newPassword = req.body.password;
-    const userId = req.body.userId;
-    const passwordToken = req.body.passwordToken;
+    const resetToken = req.body.resetToken;
     let resetUser;
 
     User.findOne({
-        resetToken: passwordToken,
-        resetTokenExpiration: { $gt: Date.now() },
-        _id: userId,
+        resetToken,
+        resetTokenExpiration: { $gt: Date.now() }
     })
         .then((user) => {
             resetUser = user;
@@ -159,7 +179,9 @@ export const postNewPassword = (req, res, next) => {
             return resetUser.save();
         })
         .then((result) => {
-            res.redirect('/login');
+            res.status(201).json({
+                message: 'Password reseted successfully!',
+            });
         })
         .catch((err) => {
             const error = new Error(err);
