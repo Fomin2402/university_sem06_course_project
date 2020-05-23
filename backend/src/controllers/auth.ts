@@ -6,6 +6,7 @@ import crypto from 'crypto';
 
 import * as config from '../../../global/env.json';
 import { sendMail } from '../utils/transporter';
+import { check } from '../utils/check';
 import User from '../models/user';
 
 export const postSignup = (
@@ -14,12 +15,12 @@ export const postSignup = (
     next: NextFunction
 ) => {
     const errors: Result<ValidationError> = validationResult(req);
-    if (!errors.isEmpty()) {
-        const error = new Error('Validation failed.');
-        (error as any).statusCode = 422;
-        (error as any).data = errors.array();
-        throw error;
-    }
+    check({
+        check: errors.isEmpty(),
+        errorMessage: 'Validation failed.',
+        errorCode: 422,
+        data: errors.array(),
+    });
 
     const email: string = req.body.email;
     const password: string = req.body.password;
@@ -28,7 +29,7 @@ export const postSignup = (
         .hash(password, 12)
         .then((hashedPw) => {
             const user = new User({
-                email: email,
+                email,
                 password: hashedPw,
             });
             return user.save();
@@ -58,12 +59,12 @@ export const postLogin = (
     next: NextFunction
 ) => {
     const errors: Result<ValidationError> = validationResult(req);
-    if (!errors.isEmpty()) {
-        const error = new Error('Validation failed.');
-        (error as any).statusCode = 422;
-        (error as any).data = errors.array();
-        throw error;
-    }
+    check({
+        check: errors.isEmpty(),
+        errorMessage: 'Validation failed.',
+        errorCode: 422,
+        data: errors.array(),
+    });
 
     const email: string = req.body.email;
     const password: string = req.body.password;
@@ -71,22 +72,18 @@ export const postLogin = (
 
     User.findOne({ email })
         .then((user: any) => {
-            if (!user) {
-                const error = new Error(
-                    'A user with this email could not be found.'
-                );
-                (error as any).statusCode = 401;
-                throw error;
-            }
+            check({
+                check: !!user,
+                errorMessage: 'A user with this email could not be found.',
+            });
             loadedUser = user;
             return bcrypt.compare(password, user.password);
         })
         .then((isEqual: boolean) => {
-            if (!isEqual) {
-                const error = new Error('Wrong password!');
-                (error as any).statusCode = 401;
-                throw error;
-            }
+            check({
+                check: isEqual,
+                errorMessage: 'Wrong password.',
+            });
             const token: string = jwt.sign(
                 {
                     email: loadedUser.email,
@@ -108,7 +105,6 @@ export const postLogin = (
         });
 };
 
-// TODO: UPDATE
 export const postReqForReset = (
     req: Request<any>,
     res: Response<any>,
@@ -124,13 +120,10 @@ export const postReqForReset = (
         const token = buffer.toString('hex');
         User.findOne({ email: req.body.email })
             .then((user: any) => {
-                if (!user) {
-                    const error = new Error(
-                        'A user with this email could not be found.'
-                    );
-                    (error as any).statusCode = 401;
-                    throw error;
-                }
+                check({
+                    check: !!user,
+                    errorMessage: 'A user with this email could not be found.',
+                });
                 user.resetToken = token;
                 user.resetTokenExpiration = Date.now() + 300000;
                 return user.save();
@@ -154,7 +147,6 @@ export const postReqForReset = (
     });
 };
 
-// TODO: UPDATE
 export const postResetPassword = (
     req: Request<any>,
     res: Response<any>,
@@ -166,9 +158,10 @@ export const postResetPassword = (
 
     User.findOne({
         resetToken,
-        resetTokenExpiration: { $gt: Date.now() }
+        resetTokenExpiration: { $gt: Date.now() },
     })
-        .then((user) => {
+        .then((user: any) => {
+            check({ check: !!user, errorMessage: 'Invalid reset tokens' });
             resetUser = user;
             return bcrypt.hash(newPassword, 12);
         })
