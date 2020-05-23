@@ -6,29 +6,24 @@ import * as adminController from '../controllers/admin';
 import { isAdmin } from '../middleware/is-admin';
 import { isAuth } from '../middleware/is-auth';
 
+// PATH: /admin/*
 const router = express.Router();
 
 router.post('/grant/:userId', isAuth, isAdmin, adminController.postGrantRole);
-
-
-// ------------------------------------------------------------
-// old
-
-// /admin/products => GET
-router.get('/products', isAuth, adminController.getProducts);
-
-// /admin/add-product => POST
 router.post(
-    '/add-product',
+    '/product',
     [
         body('title').isString().isLength({ min: 3 }).trim(),
         body('price').isFloat(),
         body('description').isLength({ min: 5, max: 400 }).trim(),
     ],
     isAuth,
+    isAdmin,
     adminController.postAddProduct
 );
 
+// ------------------------------------------------------------
+// old
 router.get('/edit-product/:productId', isAuth, adminController.getEditProduct);
 
 router.post(

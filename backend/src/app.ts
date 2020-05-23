@@ -1,4 +1,3 @@
-import { Express, RequestHandler } from 'express';
 
 // TODO: add cursor pagination!!!
 // TODO: added roles to users
@@ -7,6 +6,7 @@ import { Express, RequestHandler } from 'express';
 // TODO: added rating to products
 
 import bodyParser from 'body-parser';
+import { Express } from 'express';
 import mongoose from 'mongoose';
 import express from 'express';
 import multer from 'multer';
@@ -26,8 +26,6 @@ const app: Express = express();
 
 const pathToImagesDestination: string = path.join(
     rootDir,
-    '..',
-    '..',
     'images'
 );
 

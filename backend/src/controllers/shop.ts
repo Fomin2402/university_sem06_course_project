@@ -3,7 +3,7 @@ import STRIPE from 'stripe';
 import path from 'path';
 import fs from 'fs';
 
-import Product from '../models/product';
+import { Product, IProduct } from '../models/product';
 import Order from '../models/order';
 
 // TODO: update stripe key
