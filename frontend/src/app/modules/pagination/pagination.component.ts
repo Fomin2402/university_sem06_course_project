@@ -5,7 +5,7 @@ import { Observable, range } from 'rxjs';
 export const PAGINATION_LIMIT_LENGTH: number = 10;
 
 @Component({
-    selector: 'agencyapp-pagination',
+    selector: 'app-pagination',
     templateUrl: './pagination.component.html',
     styleUrls: ['./pagination.component.scss']
 })

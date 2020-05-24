@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
-import { API_PRODUCT } from "..";
+import { API_PRODUCT } from "../api-routes";
 
 @Injectable()
 export class ProductService {

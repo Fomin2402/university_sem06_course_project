@@ -7,7 +7,7 @@ import { getDisplaySpinner } from '../store/selectors';
 import { LoadProfile } from '../store/actions';
 
 @Component({
-    selector: 'agencyapp-main-view',
+    selector: 'app-main-view',
     animations: [
         trigger('fadeInOut', [
             state('void', style({

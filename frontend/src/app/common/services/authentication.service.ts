@@ -1,9 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import { Observable, of } from "rxjs";
 import { tap } from "rxjs/operators";
 import { Store } from "@ngrx/store";
-import { Observable } from "rxjs";
 
 import { ResetStore } from "src/app/store/clear-state";
 import { API_AUTH } from "../api-routes";
@@ -38,7 +38,7 @@ export class AuthenticationService {
   }
 
   sendRequestForResetPassword(email: string): Observable<any> {
-    return this.http.post(API_AUTH.POST_REQ_FOR_RESET_PASS, email);
+    return this.http.post(API_AUTH.POST_REQ_FOR_RESET_PASS, { email });
   }
 
   resetPassword(data: IResetPassParams): Observable<any> {
@@ -47,8 +47,9 @@ export class AuthenticationService {
       .pipe(tap(() => this.redirectToLoginPage()));
   }
 
-  logout(): void {
-    return this.reset();
+  logout(): Observable<any> {
+    this.reset();
+    return of({});
   }
 
   reset(): void {

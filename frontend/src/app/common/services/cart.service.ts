@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
-import { API_CART } from "..";
+import { API_CART } from "../api-routes";
 
 @Injectable()
 export class CartService {

@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ToastService } from '../toast.service';
 
 @Component({
-    selector: 'agencyapp-toasts',
+    selector: 'app-toasts',
     templateUrl: './toasts.component.html',
     styleUrls: ['./toasts.component.scss']
 })

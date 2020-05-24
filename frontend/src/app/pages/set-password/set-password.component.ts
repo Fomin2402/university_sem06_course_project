@@ -1,7 +1,6 @@
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
@@ -10,7 +9,7 @@ import { SetPasswordService } from './set-password.service';
 const ERROR_MESSAGE: string = 'Passwords don\'t match.';
 
 @Component({
-    selector: 'agencyapp-set-password',
+    selector: 'app-set-password',
     templateUrl: './set-password.component.html',
     styleUrls: ['./set-password.component.scss'],
     providers: [
@@ -23,11 +22,9 @@ export class SetPasswordComponent implements OnInit {
     dontMatch: string | null;
     showPass: boolean = false;
     setPasswordForm!: FormGroup;
-    agency!: IAgency;
 
     constructor(
-        private setPasswordService: SetPasswordService,
-        private route: ActivatedRoute
+        private setPasswordService: SetPasswordService
     ) { }
 
     ngOnInit(): void {
@@ -35,7 +32,6 @@ export class SetPasswordComponent implements OnInit {
             password: new FormControl('', [Validators.required]),
             confirmPassword: new FormControl('', [Validators.required])
         });
-        this.agency = this.route.snapshot.data.agency;
     }
 
     get password(): AbstractControl {

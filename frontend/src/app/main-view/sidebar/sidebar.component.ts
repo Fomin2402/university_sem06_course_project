@@ -2,10 +2,10 @@ import { Component, OnDestroy, OnInit, HostListener } from "@angular/core";
 import { select, Store } from "@ngrx/store";
 import { Subscription } from "rxjs";
 
-import { getIsUserAdmin } from "src/app/store/selectors";
+import { getUserIsAdmin } from "src/app/store/selectors";
 
 @Component({
-  selector: "agencyapp-sidebar",
+  selector: "app-sidebar",
   templateUrl: "./sidebar.component.html",
   styleUrls: ["./sidebar.component.scss"],
 })
@@ -39,7 +39,7 @@ export class SidebarComponent implements OnDestroy, OnInit {
     this.subscription = new Subscription();
     this.subscription.add(
       this.store
-        .pipe(select(getIsUserAdmin))
+        .pipe(select(getUserIsAdmin))
         .subscribe((isUserAdmin: boolean) => (this.isUserAdmin = isUserAdmin))
     );
   }

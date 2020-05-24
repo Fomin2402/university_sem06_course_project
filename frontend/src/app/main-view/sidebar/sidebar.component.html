@@ -1,223 +1,188 @@
 <div
-    [class.hide]="hideSidebar"
-    class="layout vertical justified sidebar-container"
+  [class.hide]="hideSidebar"
+  class="layout vertical justified sidebar-container"
 >
-    <div class="top layout vertical">
-        <div
-            (click)="switchSidebar()"
-            class="border-box layout horizontal center header"
-        >
-            <div
-                *ngIf="!agency || !agency.logo"
-                class="photo select-none"
-            ></div>
-            <img
-                *ngIf="agency && agency.logo"
-                [src]="agency.logo"
-                class="photo select-none"
-            />
-            <div
-                *ngIf="!hideSidebar"
-                class="layout horizontal center-center font-14 w-600 project-title"
-            >
-                {{ agency?.name }}
-            </div>
-        </div>
-
-        <div class="layout vertical navigation">
-            <a
-                [routerLink]="['/appointments']"
-                #rlaApps="routerLinkActive"
-                [routerLinkActive]="['active']"
-                class="layout horizontal center sidebar-link"
-            >
-                <div class="layout horizontal center-center sidebar-icons">
-                    <img
-                        src="{{
-                            rlaApps.isActive ? icon.activeApps : icon.apps
-                        }}"
-                        class="icon select-none"
-                    />
-                </div>
-                <div class="font-13 w-600 link-title">
-                    Appointments
-                </div>
-            </a>
-
-            <a
-                [routerLink]="['/properties']"
-                #rlaProperties="routerLinkActive"
-                [routerLinkActive]="['active']"
-                class="layout horizontal center sidebar-link"
-            >
-                <div class="layout horizontal center-center sidebar-icons">
-                    <img
-                        src="{{
-                            rlaProperties.isActive
-                                ? icon.activeHomes
-                                : icon.homes
-                        }}"
-                        class="icon select-none"
-                    />
-                </div>
-                <div class="font-13 w-600 link-title">
-                    Properties
-                </div>
-            </a>
-
-            <a
-                [routerLink]="['/messages']"
-                #rlaMessages="routerLinkActive"
-                [routerLinkActive]="['active']"
-                class="layout horizontal center sidebar-link"
-            >
-                <div class="layout horizontal center-center sidebar-icons">
-                    <img
-                        src="{{
-                            rlaMessages.isActive
-                                ? icon.activeMessages
-                                : icon.messages
-                        }}"
-                        class="icon select-none"
-                    />
-                </div>
-                <div class="font-13 w-600 link-title">
-                    Messages
-                </div>
-            </a>
-
-            <a
-                *ngIf="isUserSuperAgent"
-                [routerLink]="['/agent-messages']"
-                #rlaIncognito="routerLinkActive"
-                [routerLinkActive]="['active']"
-                class="layout horizontal center sidebar-link"
-            >
-                <div class="layout horizontal center-center sidebar-icons">
-                    <img
-                        src="{{
-                            rlaIncognito.isActive
-                                ? icon.activeAgentMessages
-                                : icon.agentMessages
-                        }}"
-                        class="icon select-none"
-                    />
-                </div>
-                <div class="font-13 w-600 link-title">
-                    Agent messages
-                </div>
-            </a>
-
-            <a
-                *ngIf="isUserSuperAgent"
-                [routerLink]="['/agents']"
-                #rlaAgents="routerLinkActive"
-                [routerLinkActive]="['active']"
-                class="layout horizontal center sidebar-link"
-            >
-                <div class="layout horizontal center-center sidebar-icons">
-                    <img
-                        src="{{
-                            rlaAgents.isActive ? icon.activeAgents : icon.agents
-                        }}"
-                        class="icon select-none"
-                    />
-                </div>
-                <div class="font-13 w-600 link-title">
-                    Agents
-                </div>
-            </a>
-
-            <a
-                [routerLink]="['/users']"
-                #rlaClients="routerLinkActive"
-                [routerLinkActive]="['active']"
-                class="layout horizontal center sidebar-link"
-            >
-                <div class="layout horizontal center-center sidebar-icons">
-                    <img
-                        src="{{
-                            rlaClients.isActive
-                                ? icon.activeClients
-                                : icon.clients
-                        }}"
-                        class="icon select-none"
-                    />
-                </div>
-                <div class="font-13 w-600 link-title">
-                    Users
-                </div>
-            </a>
-
-            <a
-                *ngIf="isUserSuperAgent"
-                [routerLink]="['/payment']"
-                #rlaPayment="routerLinkActive"
-                [routerLinkActive]="['active']"
-                class="layout horizontal center sidebar-link"
-            >
-                <div class="layout horizontal center-center sidebar-icons">
-                    <img
-                        src="{{
-                            rlaPayment.isActive
-                                ? icon.activePayment
-                                : icon.payment
-                        }}"
-                        class="icon select-none"
-                    />
-                </div>
-                <div class="font-13 w-600 link-title">
-                    Payment
-                </div>
-            </a>
-
-            <a
-                [routerLink]="['/settings']"
-                #rlaSettings="routerLinkActive"
-                [routerLinkActive]="['active']"
-                class="layout horizontal center sidebar-link"
-            >
-                <div class="layout horizontal center-center sidebar-icons">
-                    <img
-                        src="{{
-                            rlaSettings.isActive
-                                ? icon.activeSettings
-                                : icon.settings
-                        }}"
-                        class="icon select-none"
-                    />
-                </div>
-                <div class="font-13 w-600 link-title">
-                    Settings
-                </div>
-            </a>
-        </div>
+  <div class="top layout vertical">
+    <div
+      (click)="switchSidebar()"
+      class="border-box layout horizontal center header"
+    >
+      <div
+        *ngIf="!hideSidebar"
+        class="layout horizontal center-center font-14 w-600 project-title"
+      >
+        Fomin
+      </div>
     </div>
 
-    <div class="layout vertical evenly bottom">
-        <a
-            href="https://agencyapp.com.au/privacy"
-            target="_blank"
-            class="font-13 classic-link"
-            >Privacy policy</a
-        >
-        <a
-            href="https://agencyapp.com.au/eula"
-            target="_blank"
-            class="font-13 classic-link"
-            >Terms of use</a
-        >
-        <a
-            href="https://agencyapp.com.au/"
-            target="_blank"
-            class="font-13 classic-link"
-            >Contact us</a
-        >
-        <a
-            href="https://agencyapp.com.au/"
-            target="_blank"
-            class="font-13 classic-link"
-            >Help</a
-        >
+    <div class="layout vertical navigation">
+      <a
+        [routerLink]="['/appointments']"
+        #rlaApps="routerLinkActive"
+        [routerLinkActive]="['active']"
+        class="layout horizontal center sidebar-link"
+      >
+        <div class="layout horizontal center-center sidebar-icons">
+          <img
+            src="{{ rlaApps.isActive ? icon.activeApps : icon.apps }}"
+            class="icon select-none"
+          />
+        </div>
+        <div class="font-13 w-600 link-title">
+          Appointments
+        </div>
+      </a>
+
+      <a
+        [routerLink]="['/properties']"
+        #rlaProperties="routerLinkActive"
+        [routerLinkActive]="['active']"
+        class="layout horizontal center sidebar-link"
+      >
+        <div class="layout horizontal center-center sidebar-icons">
+          <img
+            src="{{ rlaProperties.isActive ? icon.activeHomes : icon.homes }}"
+            class="icon select-none"
+          />
+        </div>
+        <div class="font-13 w-600 link-title">
+          Properties
+        </div>
+      </a>
+
+      <a
+        [routerLink]="['/messages']"
+        #rlaMessages="routerLinkActive"
+        [routerLinkActive]="['active']"
+        class="layout horizontal center sidebar-link"
+      >
+        <div class="layout horizontal center-center sidebar-icons">
+          <img
+            src="{{
+              rlaMessages.isActive ? icon.activeMessages : icon.messages
+            }}"
+            class="icon select-none"
+          />
+        </div>
+        <div class="font-13 w-600 link-title">
+          Messages
+        </div>
+      </a>
+
+      <a
+        *ngIf="isUserAdmin"
+        [routerLink]="['/agent-messages']"
+        #rlaIncognito="routerLinkActive"
+        [routerLinkActive]="['active']"
+        class="layout horizontal center sidebar-link"
+      >
+        <div class="layout horizontal center-center sidebar-icons">
+          <img
+            src="{{
+              rlaIncognito.isActive
+                ? icon.activeAgentMessages
+                : icon.agentMessages
+            }}"
+            class="icon select-none"
+          />
+        </div>
+        <div class="font-13 w-600 link-title">
+          Agent messages
+        </div>
+      </a>
+
+      <a
+        *ngIf="isUserAdmin"
+        [routerLink]="['/agents']"
+        #rlaAgents="routerLinkActive"
+        [routerLinkActive]="['active']"
+        class="layout horizontal center sidebar-link"
+      >
+        <div class="layout horizontal center-center sidebar-icons">
+          <img
+            src="{{ rlaAgents.isActive ? icon.activeAgents : icon.agents }}"
+            class="icon select-none"
+          />
+        </div>
+        <div class="font-13 w-600 link-title">
+          Agents
+        </div>
+      </a>
+
+      <a
+        [routerLink]="['/users']"
+        #rlaClients="routerLinkActive"
+        [routerLinkActive]="['active']"
+        class="layout horizontal center sidebar-link"
+      >
+        <div class="layout horizontal center-center sidebar-icons">
+          <img
+            src="{{ rlaClients.isActive ? icon.activeClients : icon.clients }}"
+            class="icon select-none"
+          />
+        </div>
+        <div class="font-13 w-600 link-title">
+          Users
+        </div>
+      </a>
+
+      <a
+        *ngIf="isUserAdmin"
+        [routerLink]="['/payment']"
+        #rlaPayment="routerLinkActive"
+        [routerLinkActive]="['active']"
+        class="layout horizontal center sidebar-link"
+      >
+        <div class="layout horizontal center-center sidebar-icons">
+          <img
+            src="{{ rlaPayment.isActive ? icon.activePayment : icon.payment }}"
+            class="icon select-none"
+          />
+        </div>
+        <div class="font-13 w-600 link-title">
+          Payment
+        </div>
+      </a>
+
+      <a
+        [routerLink]="['/settings']"
+        #rlaSettings="routerLinkActive"
+        [routerLinkActive]="['active']"
+        class="layout horizontal center sidebar-link"
+      >
+        <div class="layout horizontal center-center sidebar-icons">
+          <img
+            src="{{
+              rlaSettings.isActive ? icon.activeSettings : icon.settings
+            }}"
+            class="icon select-none"
+          />
+        </div>
+        <div class="font-13 w-600 link-title">
+          Settings
+        </div>
+      </a>
     </div>
+  </div>
+
+  <div class="layout vertical evenly bottom">
+    <a
+      href="https://app.com.au/privacy"
+      target="_blank"
+      class="font-13 classic-link"
+      >Privacy policy</a
+    >
+    <a
+      href="https://app.com.au/eula"
+      target="_blank"
+      class="font-13 classic-link"
+      >Terms of use</a
+    >
+    <a href="https://app.com.au/" target="_blank" class="font-13 classic-link"
+      >Contact us</a
+    >
+    <a href="https://app.com.au/" target="_blank" class="font-13 classic-link"
+      >Help</a
+    >
+  </div>
 </div>

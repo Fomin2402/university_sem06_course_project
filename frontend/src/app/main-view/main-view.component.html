@@ -1,12 +1,12 @@
 <div class="relative main">
-    <agencyapp-sidebar></agencyapp-sidebar>
+    <app-sidebar></app-sidebar>
 
     <div class="layout vertical main-side">
-        <agencyapp-header></agencyapp-header>
+        <app-header></app-header>
         <div class="layout vertical border-box container">
             <router-outlet></router-outlet>
         </div>
     </div>
 
-    <agencyapp-spinner *ngIf="displaySpinner"></agencyapp-spinner>
+    <app-spinner *ngIf="displaySpinner"></app-spinner>
 </div>

@@ -1,125 +1,121 @@
 <div class="layout vertical center-center auth-page">
-    <div class="flex-1 layout vertical main">
-        <div class="flex-1 layout vertical center-center body">
-            <div class="layout vertical center-center logo">
-                <img
-                    *ngIf="agency && agency.logo"
-                    [src]="agency.logo"
-                    class="image"
-                />
-                <h2 class="title font-42 w-800 title">
-                    {{ agency.name }}
-                </h2>
-            </div>
+  <div class="flex-1 layout vertical main">
+    <div class="flex-1 layout vertical center-center body">
+      <div class="layout vertical center-center logo">
+        <h2 class="title font-42 w-800 title">
+          Fomin
+        </h2>
+      </div>
 
-            <form
-                [formGroup]="loginForm"
-                (ngSubmit)="onSubmit()"
-                class="layout vertical center action"
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="onSubmit()"
+        class="layout vertical center action"
+      >
+        <div class="layout vertical font-15 input-box">
+          <label class="new-label">Email address</label>
+          <div class="new-field-input with-errors">
+            <input
+              formControlName="email"
+              (focus)="incorrectValues = null"
+              type="email"
+              name="email"
+              placeholder="Your email address"
+              autocomplete="email"
+              class="field font-18"
+              [class.ng-invalid]="incorrectValues"
+            />
+            <div
+              *ngIf="email.touched && email.errors?.required"
+              class="field-error font-15"
             >
-                <div class="layout vertical font-15 input-box">
-                    <label class="new-label">Email address</label>
-                    <div class="new-field-input with-errors">
-                        <input
-                            formControlName="email"
-                            (focus)="incorrectValues = null"
-                            type="email"
-                            name="email"
-                            placeholder="Your email address"
-                            autocomplete="email"
-                            class="field font-18"
-                            [class.ng-invalid]="incorrectValues"
-                        />
-                        <div
-                            *ngIf="email.touched && email.errors?.required"
-                            class="field-error font-15"
-                        >
-                            Email is required
-                        </div>
-                        <div
-                            *ngIf="email.touched && email.errors?.email"
-                            class="field-error font-15"
-                        >
-                            Email is not valid
-                        </div>
-                    </div>
-                </div>
-
-                <div class="layout vertical font-15 input-box">
-                    <label class="new-label">Password</label>
-                    <div class="new-field-input with-errors">
-                        <input
-                            formControlName="password"
-                            (focus)="incorrectValues = null"
-                            [type]="showPass ? 'text' : 'password'"
-                            name="password"
-                            autocomplete="current-password"
-                            placeholder="Add password"
-                            class="field font-18"
-                            [class.ng-invalid]="incorrectValues"
-                        />
-                        <p
-                            (click)="switchDisplayingPassword()"
-                            class="select-none show-password"
-                            [class.active]="showPass"
-                        >
-                            show
-                        </p>
-                        <div
-                            *ngIf="
-                                password.touched && password.errors?.required
-                            "
-                            class="field-error font-15"
-                        >
-                            Password is required
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit" class="new-filled-submit">
-                    <span class="info">LOG IN </span>
-                    <span class="font-18 arrow">&#x279e;</span>
-                </button>
-
-                <a
-                    [routerLink]="['/recovery-password']"
-                    class="font-14 w-600 classic-link"
-                >
-                    Forgot your password?
-                </a>
-            </form>
+              Email is required
+            </div>
+            <div
+              *ngIf="email.touched && email.errors?.email"
+              class="field-error font-15"
+            >
+              Email is not valid
+            </div>
+          </div>
         </div>
 
-        <div class="layout vertical border-box bottom">
-            <div class="layout horizontal evenly">
-                <a
-                    href="https://agencyapp.com.au/privacy"
-                    target="_blank"
-                    class="font-12 w-500 classic-link"
-                    >Privacy policy</a
-                >
-                <a
-                    href="https://agencyapp.com.au/eula"
-                    target="_blank"
-                    class="font-12 w-500 classic-link"
-                    >Terms of use</a
-                >
-                <a
-                    href="https://agencyapp.com.au/"
-                    target="_blank"
-                    class="font-12 w-500 classic-link"
-                    >Contact us</a
-                >
-                <a
-                    href="https://agencyapp.com.au/"
-                    target="_blank"
-                    class="font-12 w-500 classic-link"
-                    >Help</a
-                >
+        <div class="layout vertical font-15 input-box">
+          <label class="new-label">Password</label>
+          <div class="new-field-input with-errors">
+            <input
+              formControlName="password"
+              (focus)="incorrectValues = null"
+              [type]="showPass ? 'text' : 'password'"
+              name="password"
+              autocomplete="current-password"
+              placeholder="Add password"
+              class="field font-18"
+              [class.ng-invalid]="incorrectValues"
+            />
+            <p
+              (click)="switchDisplayingPassword()"
+              class="select-none show-password"
+              [class.active]="showPass"
+            >
+              show
+            </p>
+            <div
+              *ngIf="password.touched && password.errors?.required"
+              class="field-error font-15"
+            >
+              Password is required
             </div>
-            <div class="font-12 w-400 layout horizontal license">
-                2019 Agency App .Inc
-            </div>
+          </div>
         </div>
+
+        <button type="submit" class="new-filled-submit">
+          <span class="info">LOG IN </span>
+          <span class="font-18 arrow">&#x279e;</span>
+        </button>
+
+        <a
+          [routerLink]="['/recovery-password']"
+          class="font-14 w-600 classic-link"
+        >
+          Forgot your password?
+        </a>
+        <a [routerLink]="['/signup']" class="font-14 w-600 classic-link">
+          Or create account?
+        </a>
+      </form>
     </div>
+
+    <div class="layout vertical border-box bottom">
+      <div class="layout horizontal evenly">
+        <a
+          href="https://app.com.au/privacy"
+          target="_blank"
+          class="font-12 w-500 classic-link"
+          >Privacy policy</a
+        >
+        <a
+          href="https://app.com.au/eula"
+          target="_blank"
+          class="font-12 w-500 classic-link"
+          >Terms of use</a
+        >
+        <a
+          href="https://app.com.au/"
+          target="_blank"
+          class="font-12 w-500 classic-link"
+          >Contact us</a
+        >
+        <a
+          href="https://app.com.au/"
+          target="_blank"
+          class="font-12 w-500 classic-link"
+          >Help</a
+        >
+      </div>
+      <div class="font-12 w-400 layout horizontal license">
+        2019 Agency App .Inc
+      </div>
+    </div>
+  </div>
 </div>

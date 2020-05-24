@@ -5,7 +5,7 @@ import { first, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { getUserProfile } from 'src/app/store/selectors/profile.selectors';
-import { AuthenticationService } from '../services';
+import { AuthenticationService } from '../services/authentication.service';
 import { LoadProfile } from 'src/app/store/actions';
 
 @Injectable()

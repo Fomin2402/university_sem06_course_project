@@ -1,49 +1,43 @@
 <div class="layout horizontal center end-justified border-box header-container">
-    <div class="greeting">
-        {{ user | userName: { prefix: "Hi, " } | shortcut: 40 }}
-    </div>
+  <div class="greeting">Hi, {{ user?.email | shortcut: 40 }}</div>
+  <div
+    class="layout horizontal"
+    (click)="isVisible = !isVisible; $event.stopImmediatePropagation()"
+  >
+    <img
+      *ngIf="!user?.image"
+      src="assets/icons/profile.svg"
+      class="image photo select-none"
+    />
+    <img
+      *ngIf="user?.image"
+      [src]="user?.image"
+      class="image photo select-none"
+    />
+    <img
+      src="assets/icons/arrow-left.svg"
+      class="arrow select-none"
+      [class.up]="isVisible"
+    />
     <div
-        class="layout horizontal"
-        (click)="isVisible = !isVisible; $event.stopImmediatePropagation()"
+      (click)="$event.stopImmediatePropagation()"
+      class="absolute layout vertical dropdown"
+      [class.hide]="!isVisible"
     >
-        <img
-            *ngIf="!userPhoto"
-            src="assets/icons/profile.svg"
-            class="image photo select-none"
-        />
-        <img
-            *ngIf="userPhoto"
-            [src]="userPhoto"
-            class="image photo select-none"
-        />
-        <img
-            src="assets/icons/arrow-left.svg"
-            class="arrow select-none"
-            [ngClass]="{ up: isVisible }"
-        />
-        <div
-            (click)="$event.stopImmediatePropagation()"
-            class="absolute layout vertical dropdown"
-            [ngClass]="{ hide: !isVisible }"
-        >
-            <div class="font-15 w-600 name" [ngClass]="{ hide: !isVisible }">
-                {{ user | userName: { error: "Not set" } | shortcut }}
-            </div>
-            <a
-                (click)="isVisible = !isVisible"
-                [routerLink]="['/settings']"
-                class="font-13"
-                [ngClass]="{ hide: !isVisible }"
-            >
-                My profile settings
-            </a>
-            <a
-                (click)="logout()"
-                [ngClass]="{ hide: !isVisible }"
-                class="font-13"
-            >
-                Log out
-            </a>
-        </div>
+      <div class="font-15 w-600 name" [class.hide]="!isVisible">
+        {{ user?.email | shortcut }}
+      </div>
+      <a
+        (click)="isVisible = !isVisible"
+        [routerLink]="['/settings']"
+        class="font-13"
+        [class.hide]="!isVisible"
+      >
+        My profile settings
+      </a>
+      <a (click)="logout()" [class.hide]="!isVisible" class="font-13">
+        Log out
+      </a>
     </div>
+  </div>
 </div>

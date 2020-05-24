@@ -18,7 +18,7 @@ import { DynamicComponentRef } from 'src/app/common';
 import { PopoverData } from './popover-data';
 
 @Component({
-    selector: 'agencyapp-popover',
+    selector: 'app-popover',
     templateUrl: './popover.component.html',
     styleUrls: ['./popover.component.scss']
 })

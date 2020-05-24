@@ -1,111 +1,176 @@
 <div class="layout vertical border-box signup-container">
+  <div class="font-34 border-box page-title">Fomin</div>
 
-    <div class="font-34 border-box page-title">RealtorX</div>
+  <div class="layout vertical flex-1 main-container">
+    <div class="border-box intro-box">
+      <div class="font-34 intro-title">
+        Welcome to Fomin
+      </div>
 
-    <div class="layout vertical flex-1 main-container">
-        <div class="border-box intro-box">
-            <div class="font-34 intro-title">
-                Welcome to RealtorX
-            </div>
-
-            <div class="font-18 intro-sub-title">
-                First time here? Please sign up to use RealtorX
-            </div>
-        </div>
-
-        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" autocomplete="on" class="border-box signup-form">
-            <div class="layout vertical font-15 input-box">
-                <label class="label">Full name</label>
-                <div class="field-input">
-                    <input formControlName="fullname" (focus)=" error = false; " type="text" name="fullname" autocomplete="username"
-                        placeholder="Enter full name" class="field font-18" [class.ng-invalid]="error">
-                    <div *ngIf="fullname.invalid && fullname.touched" class="field-error font-15">
-                        Full name is required
-                    </div>
-                </div>
-            </div>
-
-            <div class="layout vertical font-15 input-box">
-                <label class="label">Email address</label>
-                <div class="field-input">
-                    <input formControlName="email" (focus)=" error = false; " type="email" name="email" placeholder="Your email address"
-                        autocomplete="email" class="field font-18" [class.ng-invalid]="error">
-                    <div *ngIf="email.touched && email.errors?.required" class="field-error font-15">
-                        Email is required
-                    </div>
-                    <div *ngIf="email.touched && email.errors?.email" class="field-error font-15">
-                        Email is not valid
-                    </div>
-                </div>
-            </div>
-
-            <div class="layout vertical font-15 input-box">
-                <label class="label">Password</label>
-                <div class="field-input">
-                    <input formControlName="password" (focus)=" error = false; " [type]="showPassword ? 'text' : 'password'" name="password"
-                        autocomplete="new-password" placeholder="Add password" class="field font-18" [class.ng-invalid]="error">
-                    <img (click)="switchShowPassword()" class="input-icon select-none"
-                        [src]="showPassword ? 'assets/icons/eye.svg' : 'assets/icons/eye-slash.svg'">
-                    <div *ngIf="password.touched && password.errors?.required" class="field-error font-15">
-                        Password is required
-                    </div>
-                    <div *ngIf="password.touched && password.errors?.minlength" class="field-error font-15">
-                        Password should be minimum eight symbols
-                    </div>
-                </div>
-            </div>
-
-            <div class="layout vertical font-15 input-box">
-                <label class="label">Confirm your password</label>
-                <div class="field-input">
-                    <input formControlName="confirmPassword" (focus)=" error = false; " [type]="showPassword ? 'text' : 'password'" name="confirm"
-                        autocomplete="new-password" placeholder="Password again" class="field font-18"
-                        [class.ng-invalid]="signupForm.errors?.confirmPass" [class.ng-invalid]="error">
-                    <div *ngIf="confirmPassword.touched && confirmPassword.errors?.required"
-                        class="field-error font-15">
-                        Confirm your password
-                    </div>
-                    <div *ngIf="confirmPassword.touched && confirmPassword.value && signupForm.errors?.confirmPass"
-                        class="field-error font-15">
-                        Passwords do not match
-                    </div>
-                </div>
-            </div>
-
-            <div class="layout vertical font-15 input-box">
-                <label class="label">Company name</label>
-                <div class="field-input">
-                    <input formControlName="company" (focus)=" error = false; " type="text" name="company" placeholder="Your company name"
-                        class="field font-18" [class.ng-invalid]="error">
-                    <div *ngIf="company.invalid && company.touched" class="field-error font-15">
-                        Company name is required
-                    </div>
-                </div>
-            </div>
-
-            <div class="layout horizontal center font-15 terms-conditions">
-                <input formControlName="termsAndPolicy" type="checkbox" id="cbx" style="display: none;">
-                <label for="cbx" class="layout horizontal center check">
-                    <svg width="18px" height="18px" viewBox="0 0 18 18">
-                        <path
-                            d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z">
-                        </path>
-                        <polyline points="1 9 7 14 15 4"></polyline>
-                    </svg>
-                    I agree with<a href="" title="Terms & conditions" class="link">terms & conditions</a>
-                </label>
-            </div>
-
-            <button [disabled]="signupForm.invalid" type="submit" class="layout horizontal center-center font-18 submit"
-                [class.disabled]="signupForm.invalid">
-                SIGN UP
-            </button>
-
-        </form>
-
-        <div class="layout horizontal center font-18 login-redirect">
-            Already have an account? <a [routerLink]="['/login']" title="Login page" class="link">Log In instead</a>
-        </div>
-
+      <div class="font-18 intro-sub-title">
+        First time here? Please sign up to use Fomin
+      </div>
     </div>
+
+    <form
+      [formGroup]="signupForm"
+      (ngSubmit)="onSubmit()"
+      autocomplete="on"
+      class="border-box signup-form"
+    >
+      <div class="layout vertical font-15 new-input-box">
+        <label class="new-label">Full name</label>
+        <div class="new-field-input with-errors">
+          <input
+            formControlName="fullname"
+            (focus)="error = false"
+            type="text"
+            name="fullname"
+            autocomplete="username"
+            placeholder="Enter full name"
+            class="field font-18"
+            [class.ng-invalid]="error"
+          />
+          <div
+            *ngIf="fullname.invalid && fullname.touched"
+            class="field-error font-15"
+          >
+            Full name is required
+          </div>
+        </div>
+      </div>
+
+      <div class="layout vertical font-15 input-box">
+        <label class="new-label">Email address</label>
+        <div class="new-field-input with-errors">
+          <input
+            formControlName="email"
+            (focus)="error = false"
+            type="email"
+            name="email"
+            placeholder="Your email address"
+            autocomplete="email"
+            class="field font-18"
+            [class.ng-invalid]="error"
+          />
+          <div
+            *ngIf="email.touched && email.errors?.required"
+            class="field-error font-15"
+          >
+            Email is required
+          </div>
+          <div
+            *ngIf="email.touched && email.errors?.email"
+            class="field-error font-15"
+          >
+            Email is not valid
+          </div>
+        </div>
+      </div>
+
+      <div class="layout vertical font-15 input-box">
+        <label class="new-label">Password</label>
+        <div class="new-field-input with-errors">
+          <input
+            formControlName="password"
+            (focus)="error = false"
+            [type]="showPassword ? 'text' : 'password'"
+            name="password"
+            autocomplete="new-password"
+            placeholder="Add password"
+            class="field font-18"
+            [class.ng-invalid]="error"
+          />
+          <p
+            (click)="switchShowPassword()"
+            class="select-none absolute show-password"
+            [class.active]="showPassword"
+          >
+            show
+          </p>
+          <div
+            *ngIf="password.touched && password.errors?.required"
+            class="field-error font-15"
+          >
+            Password is required
+          </div>
+          <div
+            *ngIf="password.touched && password.errors?.minlength"
+            class="field-error font-15"
+          >
+            Password should be minimum eight symbols
+          </div>
+        </div>
+      </div>
+
+      <div class="layout vertical font-15 input-box">
+        <label class="new-label">Confirm your password</label>
+        <div class="new-field-input with-errors">
+          <input
+            formControlName="confirmPassword"
+            (focus)="error = false"
+            [type]="showPassword ? 'text' : 'password'"
+            name="confirm"
+            autocomplete="new-password"
+            placeholder="Password again"
+            class="field font-18"
+            [class.ng-invalid]="signupForm.errors?.confirmPass"
+            [class.ng-invalid]="error"
+          />
+          <div
+            *ngIf="confirmPassword.touched && confirmPassword.errors?.required"
+            class="field-error font-15"
+          >
+            Confirm your password
+          </div>
+          <div
+            *ngIf="
+              confirmPassword.touched &&
+              confirmPassword.value &&
+              signupForm.errors?.confirmPass
+            "
+            class="field-error font-15"
+          >
+            Passwords do not match
+          </div>
+        </div>
+      </div>
+
+      <div class="layout horizontal center font-15 terms-conditions">
+        <input
+          formControlName="termsAndPolicy"
+          type="checkbox"
+          id="cbx"
+          style="display: none;"
+        />
+        <label for="cbx" class="layout horizontal center new-check">
+          <svg width="18px" height="18px" viewBox="0 0 18 18">
+            <path
+              d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"
+            ></path>
+            <polyline points="1 9 7 14 15 4"></polyline>
+          </svg>
+          I agree with<a href="" title="Terms & conditions" class="classic-link"
+            >terms & conditions</a
+          >
+        </label>
+      </div>
+
+      <button
+        [disabled]="signupForm.invalid"
+        type="submit"
+        class="layout horizontal center-center font-18 new-filled-submit"
+        [class.invlalid]="signupForm.invalid"
+      >
+        SIGN UP
+      </button>
+    </form>
+
+    <div class="layout horizontal center font-18 login-redirect">
+      Already have an account?
+      <a [routerLink]="['/login']" title="Login page" class="classic-link">
+        Log In instead</a
+      >
+    </div>
+  </div>
 </div>

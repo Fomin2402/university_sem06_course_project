@@ -86,11 +86,11 @@ export class ProfileEffect {
   ) {}
 
   private callToaster(err: any): void {
-    const msg: any = err.error.errors || "Something went wrong";
+    const msg: any =
+      err.error.message || err.error.errors || "Something went wrong";
     if (typeof msg === "string") {
       this.toastService.add({ msg });
     }
-
     if (Array.isArray(msg)) {
       msg.forEach((item: any) => {
         if (typeof item === "string") {

@@ -1,5 +1,10 @@
+interface IUserMongo {
+  user: IUser;
+}
+
 interface IUser {
+  _id: string;
   email: string;
   isAdmin: boolean;
-  _id: string;
+  image?: string;
 }

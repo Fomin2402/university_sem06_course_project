@@ -138,48 +138,6 @@ button.light-cancel {
     }
 }
 
-/*
-button.accept {
-    border: 0;
-    height: 30px;
-    border-radius: $border-radius;
-    background: $light-blue;
-    color: $main-blue;
-    transition: $transition;
-
-    &:hover {
-        background-color: $opacity-blue;
-    }
-}
-
-button.white {
-    border: 0;
-    height: 30px;
-    border-radius: $border-radius;
-    background: $white;
-    color: $black;
-    border: $border-grey;
-    transition: $transition;
-
-    &:hover {
-        background-color: $light-grey;
-    }
-}
-
-button.remove {
-    border: 0;
-    height: 30px;
-    border-radius: $border-radius;
-    background: $white;
-    color: $black;
-    transition: $transition;
-
-    &:hover {
-        color: $red;
-    }
-}
-
-*/
 @media screen and #{$max-height} {
     button.submit {
         height: $small-height;

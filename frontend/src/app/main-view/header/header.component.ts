@@ -6,7 +6,7 @@ import { getUserProfile } from 'src/app/store/selectors/profile.selectors';
 import { LogoutUser } from 'src/app/store/actions';
 
 @Component({
-    selector: 'agencyapp-header',
+    selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss']
 })
@@ -19,12 +19,6 @@ export class HeaderComponent implements OnDestroy, OnInit {
 
     constructor(private store: Store<IAppState>) { }
 
-    get userPhoto(): string | null {
-        if (this.user && this.user.photo && this.user.photo.thumbnail) {
-            return this.user.photo.thumbnail;
-        }
-        return null;
-    }
     ngOnInit(): void {
         this.subscription = this.store
             .pipe(select(getUserProfile))

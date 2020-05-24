@@ -1,5 +1,7 @@
-@import "global-variables";
-@import "color-palette";
+@import "new-global-variables";
+@import "new-color-palette";
+
+$max-width-signup-form: 450px;
 
 .signup-container {
   height: 100%;
@@ -7,7 +9,7 @@
 
   .page-title {
     padding: 20px 0;
-    color: $main-blue;
+    color: $main-color;
     font-weight: 600;
   }
 
@@ -28,24 +30,22 @@
 
     .signup-form {
       padding: 24px 0;
-      border-top: $border;
-      border-bottom: $border;
-      border-color: $border-color;
+      border-top: $classic-button-border;
+      border-bottom: $classic-button-border;
+      border-color: $input-border-color;
 
-      .input-box {
-        padding-top: 24px;
-
-        &:first-child {
-          padding-top: 0;
-        }
+      .show-password {
+        cursor: pointer;
+        right: 15px;
       }
 
       .terms-conditions {
-        padding-top: 23px;
+        padding: 23px 0;
       }
 
-      .submit {
-        margin-top: 40px;
+      .new-filled-submit.invlalid {
+        background-color: transparent;
+        color: $main-color;
       }
     }
 
@@ -53,6 +53,10 @@
       margin: 24px 0;
     }
   }
+}
+
+.classic-link {
+  padding-left: 5px;
 }
 
 @media screen and #{$max-width} {
@@ -71,7 +75,7 @@
 
     .page-title {
       padding: 10px 0;
-      color: $main-blue;
+      color: $main-color;
       font-weight: 600;
     }
 

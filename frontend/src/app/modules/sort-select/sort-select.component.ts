@@ -1,7 +1,7 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-    selector: 'agencyapp-sort-select',
+    selector: 'app-sort-select',
     templateUrl: './sort-select.component.html',
     styleUrls: ['./sort-select.component.scss']
 })

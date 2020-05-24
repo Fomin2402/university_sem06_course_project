@@ -1,21 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
+// TODO: update later
 
-import { initialAppState } from 'src/app/store/reducers';
-import { LoginComponent } from './login.component';
-import { LoginUser } from 'src/app/store/actions';
-import {
-    MOCK_AGENCY,
-    MOCK_CREDS,
-    MOCK_EMAIL,
-    MOCK_PASSWORD
-} from 'src/app/common';
-
+/*
 describe('Login Component', () => {
 
     const initialState: IAppState = {
@@ -145,3 +130,4 @@ describe('Login Component', () => {
     });
 
 });
+*/

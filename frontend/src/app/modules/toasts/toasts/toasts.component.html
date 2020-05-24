@@ -1,4 +1,4 @@
 <div class="layout vertical toasts" [ngClass]="position || 'bottom-right'">
-    <agencyapp-toast *ngFor="let toast of $toasts | async" [toast]="toast" [customClass]="toast.customClass">
-    </agencyapp-toast>
+    <app-toast *ngFor="let toast of $toasts | async" [toast]="toast" [customClass]="toast.customClass">
+    </app-toast>
 </div>
