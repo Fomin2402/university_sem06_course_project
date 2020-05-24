@@ -21,7 +21,7 @@ export const isAuth = (
     try {
         decodedToken = jwt.verify(token, config.backend.jwt.jsonwebtoken);
     } catch (err) {
-        err.statusCode = 500;
+        err.statusCode = 401;
         throw err;
     }
     if (!decodedToken) {
