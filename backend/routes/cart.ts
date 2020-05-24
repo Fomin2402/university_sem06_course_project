@@ -9,4 +9,5 @@ const router: Router = express.Router();
 router.get('/', isAuth, cartController.getCart);
 router.post('/:productId', isAuth, cartController.postCart);
 router.delete('/:productId', isAuth, cartController.deleteItemFromCart);
+
 export = router;

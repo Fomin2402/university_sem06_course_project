@@ -1,8 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
-import { customCheck, checkValidationResult } from '../utils/check';
 import { Product, IProduct } from '../models/product';
-import { Order, IOrder } from '../models/order';
+import { customCheck } from '../utils/check';
 import { User, IUser } from '../models/user';
 
 export const getCart = (

@@ -15,9 +15,7 @@ import authRoutes from './routes/auth';
 import adminRoutes from './routes/admin';
 import producRoutes from './routes/product';
 import cartRoutes from './routes/cart';
-
-// TODO: old route
-import shopRoutes from './routes/shop';
+import orderRoutes from './routes/order';
 
 import rootDir from './utils/path';
 
@@ -89,9 +87,7 @@ app.use(authRoutes);
 app.use('/admin', adminRoutes);
 app.use('/product', producRoutes);
 app.use('/cart', cartRoutes);
-
-// TODO: old route
-app.use(shopRoutes);
+app.use('/order', orderRoutes);
 
 app.use((error, req, res, next) => {
     console.log(error);
