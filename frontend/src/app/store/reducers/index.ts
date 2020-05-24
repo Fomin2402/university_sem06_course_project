@@ -1,16 +1,10 @@
-/*
+import { profileInitialState } from './profile.reducer';
+import { spinnerInitialState } from './spinner.reducer';
+
+export * from "./profile.reducer";
+export * from "./spinner.reducer";
+
 export const initialAppState: IAppState = {
     profileState: profileInitialState,
-    scheduleState: scheduleInitialState,
-    agencyState: agencyInitialState,
-    homesState: homesInitialState,
-    homeStatisticState: homeStatisticInitialState,
-    imageCarouselState: imageCarouselInitialState,
-    clientsState: clientsInitialState,
-    currentClientState: currentClientInitialState,
-    agentsState: agentsInitialState,
-    spinnerState: spinnerInitialState,
-    paymentState: paymentInitialState,
-    threadMetadataState: threadMetadataInitialState
+    spinnerState: spinnerInitialState
 };
-*/
