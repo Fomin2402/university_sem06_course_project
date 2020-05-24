@@ -1,0 +1,103 @@
+@import "global-variables";
+@import "color-palette";
+
+.signup-container {
+  height: 100%;
+  padding: 0 10%;
+
+  .page-title {
+    padding: 20px 0;
+    color: $main-blue;
+    font-weight: 600;
+  }
+
+  .main-container {
+    max-width: $max-width-signup-form;
+
+    .intro-box {
+      padding: 4.8vh 0;
+
+      .intro-title {
+        padding-top: 2.8vh;
+      }
+
+      .intro-sub-title {
+        padding-top: 1.5vh;
+      }
+    }
+
+    .signup-form {
+      padding: 24px 0;
+      border-top: $border;
+      border-bottom: $border;
+      border-color: $border-color;
+
+      .input-box {
+        padding-top: 24px;
+
+        &:first-child {
+          padding-top: 0;
+        }
+      }
+
+      .terms-conditions {
+        padding-top: 23px;
+      }
+
+      .submit {
+        margin-top: 40px;
+      }
+    }
+
+    .login-redirect {
+      margin: 24px 0;
+    }
+  }
+}
+
+@media screen and #{$max-width} {
+  .signup-container {
+    padding: 0 5vw;
+
+    .signup-form .dual-input {
+      flex-direction: column;
+    }
+  }
+}
+
+@media screen and #{$max-height} {
+  .signup-container {
+    padding: 0 auto;
+
+    .page-title {
+      padding: 10px 0;
+      color: $main-blue;
+      font-weight: 600;
+    }
+
+    .main-container {
+      justify-content: center;
+
+      .intro-box {
+        padding: 0;
+        padding-bottom: 10px;
+
+        .intro-title {
+          padding-top: 0;
+        }
+
+        .intro-sub-title {
+          padding-top: 5px;
+        }
+      }
+
+      .signup-form {
+        flex: 0;
+
+        .input-box {
+          padding-top: 20px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+@import "new-global-variables";
+@import "new-color-palette";
+
+.accordion {
+    cursor: pointer;
+    width: 100%;
+    transition: $transition;
+
+    &:hover {
+        color: $main-color;
+    }
+
+    &.hide {
+        display: none;
+    }
+}
+
+.panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height transition ease-out;
+
+    &.opened {
+        max-height: 50px;
+    }
+}

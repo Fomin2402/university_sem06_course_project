@@ -1,0 +1,4 @@
+<div class="accordion border-box" (click)="toggleAccordian($event)" [class.hide]="hideTitle && isOpen"> {{ title | shortcut }} </div>
+<div #accordionPanel class="panel" (click)="toggleAccordian($event)" [class.opened]="isOpen">
+    <ng-content></ng-content>
+</div>

@@ -1,0 +1,33 @@
+@import "new-global-variables";
+@import "new-color-palette";
+
+.main {
+    width: 100%;
+    height: 100%;
+
+    .main-side {
+        position: absolute;
+        left: $indentation-for-sidebar;
+        width: calc(100% - #{$indentation-for-sidebar});
+        height: 100%;
+        background-color: $main-background;
+
+        .container {
+            height: calc(100% - #{$shell-header-height});
+            width: 100%;
+        }
+    }
+}
+
+@media screen and #{$max-height} {
+    .main .main-side .container {
+        height: calc(100% - #{$shell-small-header-height});
+    }
+}
+
+@media screen and #{$max-width} {
+    .main .main-side {
+        left: $small-indentation-for-sidebar;
+        width: calc(100% - #{$small-indentation-for-sidebar});
+    }
+}

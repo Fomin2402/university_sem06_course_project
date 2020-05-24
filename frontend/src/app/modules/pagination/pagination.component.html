@@ -1,0 +1,58 @@
+<div
+    *ngIf="size > limit"
+    class="layout horizontal center-center pagination-container"
+>
+    <img
+        (click)="previous()"
+        src="assets/icons/arrow-left.svg"
+        class="layout horizontal center-center pagination-icon select-none"
+        [class.active]="currentPage !== 1"
+    />
+
+    <div
+        (click)="setPage(1)"
+        class="layout horizontal center-center font-13 pagination-page-number select-none"
+        [class.active]="1 === currentPage && !loading"
+    >
+        1
+    </div>
+
+    <div
+        *ngIf="currentPage - range > 2"
+        class="layout horizontal center-center font-13 pagination-page-number select-none"
+    >
+        ...
+    </div>
+
+    <div
+        *ngFor="let page of pages | async"
+        (click)="setPage(page)"
+        class="layout horizontal center-center font-13 pagination-page-number select-none"
+        [class.active]="page === currentPage && !loading"
+    >
+        {{ page }}
+    </div>
+
+    <div
+        *ngIf="totalPages - 1 > currentPage + range"
+        class="layout horizontal center-center font-13 pagination-page-number select-none"
+    >
+        ...
+    </div>
+
+    <div
+        *ngIf="totalPages !== 1"
+        (click)="setPage(totalPages)"
+        class="layout horizontal center-center font-13 pagination-page-number select-none"
+        [class.active]="totalPages === currentPage && !loading"
+    >
+        {{ totalPages }}
+    </div>
+
+    <img
+        (click)="next()"
+        src="assets/icons/arrow-right.svg"
+        class="layout horizontal center-center pagination-icon select-none"
+        [class.active]="totalPages !== currentPage"
+    />
+</div>

@@ -1,0 +1,19 @@
+<div class="select-container">
+    <div class="border-box layout horizontal center status-dropdown select" (click)="toogleSortSelect($event)">
+        <span class="select-text">Sort:</span>
+        <span *ngIf="sorts[currentSortIndex]" class="selected-status">{{ sorts[currentSortIndex].key }}</span>
+        <div class="layout horizontal center end-justified flex-1">
+            <img src="assets/icons/black-triangle.svg" class="arrow-icon select-none"
+                [ngClass]="{'open': isSortSelectOpen}">
+        </div>
+    </div>
+
+    <div class="border-box list" [ngClass]="{'expand': isSortSelectOpen}">
+        <div *ngFor="let sort of sorts; let i = index" (click)="setSortByIndex(i)"
+            class="border-box layout horizontal center start-justified item"
+            [ngClass]="{'selected': i === currentSortIndex}">
+            {{ sort.key }}
+        </div>
+    </div>
+
+</div>

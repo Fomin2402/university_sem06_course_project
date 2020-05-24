@@ -1,0 +1,65 @@
+@import "new-global-variables";
+@import "new-color-palette";
+
+$indent: 15px;
+
+.popover-continer {
+    z-index: 2;
+    background: $white;
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.246039);
+    border-radius: $shell-dropdown-border-radius;
+
+    &.left {
+        right: calc(100% + #{$indent});
+
+        .arrow {
+            right: -5px;
+        }
+    }
+
+    &.right {
+        left: calc(100% + #{$indent});
+
+        .arrow {
+            left: -5px;
+        }
+    }
+
+    &.top {
+        top: #{-$indent};
+
+        &.indent {
+            top: $indent;
+        }
+
+        .arrow {
+            top: 20px;
+        }
+    }
+
+    &.bottom {
+        bottom: #{-$indent};
+
+        &.indent {
+            bottom: $indent;
+        }
+
+        .arrow {
+            bottom: 20px;
+        }
+    }
+
+    .main-conent {
+        padding: 14px;
+        background: $white;
+    }
+
+    .arrow {
+        transform: rotate(45deg);
+        background-color: $white;
+        box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.246039);
+        height: 18px;
+        width: 18px;
+        z-index: -1;
+    }
+}

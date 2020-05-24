@@ -1,0 +1,167 @@
+@import "new-global-variables";
+@import "new-color-palette";
+
+$margin: 13px;
+$logo-size: 46px;
+$logo-small-size: 40px;
+
+$photo-margin-right: ($indentation-for-sidebar - $logo-size)/2;
+$photo-small-margin-right: ($small-indentation-for-sidebar - $logo-small-size)/2;
+
+$sidebar-link-hover-color: #797979;
+
+.photo {
+    height: $logo-size;
+    width: $logo-size;
+    max-height: $logo-size;
+    max-width: $logo-size;
+    border-radius: 50%;
+    margin-right: $photo-margin-right;
+    object-fit: cover;
+}
+div.photo {
+    background-color: $default-img-color;
+}
+
+.sidebar-container {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: $sidebar-width;
+    background-color: $white;
+    box-shadow: $box-shadow-sidebar;
+
+    .header {
+        cursor: pointer;
+        justify-content: center;
+        height: $shell-header-height;
+        border-bottom: $shell-border;
+        color: $main-color;
+
+        .project-title {
+            word-break: break-word;
+            transition: $transition;
+            height: 100%;
+
+            &:hover {
+                color: $main-color-hover;
+            }
+        }
+    }
+
+    .navigation {
+        .sidebar-link {
+            color: $black;
+
+            &:first-child {
+                margin-top: 24px;
+            }
+
+            &:hover {
+                color: $sidebar-link-hover-color;
+                transition: $transition;
+            }
+
+            &.active {
+                color: $main-color;
+                transition: $transition;
+            }
+
+            .sidebar-icons {
+                padding-left: $sidebar-link-space-between-border-and-icon;
+                padding-right: $sidebar-link-space-between-border-and-icon +
+                    $sidebar-active-link-border-size;
+                border-left: $sidebar-active-link-border-size solid transparent;
+                height: #{$icon-size + $margin * 2};
+                width: $icon-size;
+            }
+
+            &.active {
+                .sidebar-icons {
+                    transition: $transition border-color;
+                    border-left-color: $main-color;
+                }
+            }
+        }
+    }
+
+    .bottom {
+        padding: 24px 0;
+        margin: 0 24px;
+        border-top: $shell-border;
+        a {
+            margin-bottom: 12px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &.hide {
+        left: $hide-sidebar;
+
+        .header {
+            justify-content: flex-end;
+        }
+
+        .sidebar-link {
+            flex-flow: row-reverse;
+
+            .link-title {
+                display: none;
+            }
+        }
+
+        .bottom {
+            border: none;
+        }
+    }
+}
+
+@media screen and #{$max-height} {
+    .sidebar-container .header {
+        height: $shell-small-header-height;
+    }
+}
+
+@media screen and #{$max-width} {
+    .sidebar-container {
+        width: $small-sidebar-width;
+
+        .header .photo {
+            height: $logo-small-size;
+            width: $logo-small-size;
+            max-height: $logo-small-size;
+            max-width: $logo-small-size;
+            margin-right: $photo-small-margin-right;
+        }
+
+        .navigation .sidebar-link .sidebar-icons {
+            padding-left: $small-sidebar-link-space-between-border-and-icon;
+            padding-right: $small-sidebar-link-space-between-border-and-icon +
+                $sidebar-active-link-border-size;
+        }
+
+        &.hide {
+            left: $small-hide-sidebar;
+
+            .header .project-title {
+                display: none;
+            }
+
+            .navigation .sidebar-link {
+                flex-flow: row-reverse;
+
+                .link-title {
+                    display: none;
+                }
+            }
+
+            .bottom {
+                border: none;
+            }
+        }
+    }
+}

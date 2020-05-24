@@ -1,0 +1,42 @@
+.toasts {
+    position: fixed;
+    z-index: 99999;
+
+    &.bottom-left {
+        left: 30px;
+        bottom: 20px;
+        align-items: flex-start;
+    }
+
+    &.bottom-center {
+        left: 50%;
+        transform: translate(-50%, 0);
+        bottom: 20px;
+        align-items: center;
+    }
+
+    &.bottom-right {
+        right: 30px;
+        bottom: 20px;
+        align-items: flex-end;
+    }
+
+    &.top-left {
+        left: 30px;
+        top: 30px;
+        align-items: flex-start;
+    }
+
+    &.top-center {
+        left: 50%;
+        transform: translate(-50%, 0);
+        top: 30px;
+        align-items: center;
+    }
+
+    &.top-right {
+        right: 30px;
+        top: 30px;
+        align-items: flex-end;
+    }
+}

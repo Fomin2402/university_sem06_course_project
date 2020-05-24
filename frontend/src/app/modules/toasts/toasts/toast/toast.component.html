@@ -1,0 +1,8 @@
+<div class="layout horizontal start-justified center toast" [ngClass]="customClass">
+    <div class="toast-text">
+        {{ toast?.msg }}
+    </div>
+    <div class="toast-action select-none" (click)="toast.action.onClick()">
+        {{toast?.action?.text}}
+    </div>
+</div>

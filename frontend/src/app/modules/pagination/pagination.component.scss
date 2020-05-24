@@ -1,0 +1,48 @@
+@import "new-global-variables";
+@import "new-color-palette";
+
+$pagination-icon-color: #8d8d8d;
+
+.pagination-container {
+    height: 100%;
+    width: 100%;
+
+    .pagination-icon {
+        height: 9px;
+        width: 9px;
+        margin: 0 20px;
+        padding: 5px;
+        border-radius: 50%;
+        border: $main-border-width $main-border-style $pagination-icon-color;
+        opacity: 0.6;
+        transition: $transition;
+
+        &.active:hover {
+            opacity: 1;
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+    }
+
+    .pagination-page-number {
+        cursor: pointer;
+        height: 20px;
+        width: 20px;
+        margin: 5px;
+        border-radius: 50%;
+        color: $table-row-color-3;
+        transition: $transition;
+
+        &.active {
+            width: 30px;
+            height: 30px;
+            margin: 0px;
+            background-color: $main-color;
+            color: $white !important;
+        }
+
+        &:hover {
+            color: $main-color;
+        }
+    }
+}
