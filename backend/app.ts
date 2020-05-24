@@ -16,8 +16,7 @@ import adminRoutes from './routes/admin';
 import producRoutes from './routes/product';
 import cartRoutes from './routes/cart';
 import orderRoutes from './routes/order';
-
-import rootDir from './utils/path';
+import userRoutes from './routes/user';
 
 const MONGODB_URI: string = config.atlas.connection;
 
@@ -88,6 +87,7 @@ app.use('/admin', adminRoutes);
 app.use('/product', producRoutes);
 app.use('/cart', cartRoutes);
 app.use('/order', orderRoutes);
+app.use('/user', userRoutes);
 
 app.use((error, req, res, next) => {
     console.log(error);
