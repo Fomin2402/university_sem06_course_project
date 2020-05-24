@@ -17,149 +17,91 @@
 
     <div class="layout vertical navigation">
       <a
-        [routerLink]="['/appointments']"
-        #rlaApps="routerLinkActive"
+        [routerLink]="['/cart']"
+        #rlaCart="routerLinkActive"
         [routerLinkActive]="['active']"
         class="layout horizontal center sidebar-link"
       >
         <div class="layout horizontal center-center sidebar-icons">
           <img
-            src="{{ rlaApps.isActive ? icon.activeApps : icon.apps }}"
+            src="{{ rlaCart.isActive ? icon.activeApps : icon.apps }}"
             class="icon select-none"
           />
         </div>
         <div class="font-13 w-600 link-title">
-          Appointments
+          Cart
         </div>
       </a>
 
       <a
-        [routerLink]="['/properties']"
-        #rlaProperties="routerLinkActive"
+        [routerLink]="['/products']"
+        #rlaProducts="routerLinkActive"
         [routerLinkActive]="['active']"
         class="layout horizontal center sidebar-link"
       >
         <div class="layout horizontal center-center sidebar-icons">
           <img
-            src="{{ rlaProperties.isActive ? icon.activeHomes : icon.homes }}"
+            src="{{ rlaProducts.isActive ? icon.activeHomes : icon.homes }}"
             class="icon select-none"
           />
         </div>
         <div class="font-13 w-600 link-title">
-          Properties
+          Products
         </div>
       </a>
 
       <a
-        [routerLink]="['/messages']"
-        #rlaMessages="routerLinkActive"
+        [routerLink]="['/orders']"
+        #rlaOrders="routerLinkActive"
+        [routerLinkActive]="['active']"
+        class="layout horizontal center sidebar-link"
+      >
+        <div class="layout horizontal center-center sidebar-icons">
+          <img
+            src="{{ rlaOrders.isActive ? icon.activeMessages : icon.messages }}"
+            class="icon select-none"
+          />
+        </div>
+        <div class="font-13 w-600 link-title">
+          Orders
+        </div>
+      </a>
+
+      <a
+        *ngIf="isUserAdmin"
+        [routerLink]="['/admin']"
+        #rlaAdmin="routerLinkActive"
         [routerLinkActive]="['active']"
         class="layout horizontal center sidebar-link"
       >
         <div class="layout horizontal center-center sidebar-icons">
           <img
             src="{{
-              rlaMessages.isActive ? icon.activeMessages : icon.messages
+              rlaAdmin.isActive ? icon.activeAgentMessages : icon.agentMessages
             }}"
             class="icon select-none"
           />
         </div>
         <div class="font-13 w-600 link-title">
-          Messages
+          Admin
         </div>
       </a>
 
       <a
         *ngIf="isUserAdmin"
-        [routerLink]="['/agent-messages']"
-        #rlaIncognito="routerLinkActive"
-        [routerLinkActive]="['active']"
-        class="layout horizontal center sidebar-link"
-      >
-        <div class="layout horizontal center-center sidebar-icons">
-          <img
-            src="{{
-              rlaIncognito.isActive
-                ? icon.activeAgentMessages
-                : icon.agentMessages
-            }}"
-            class="icon select-none"
-          />
-        </div>
-        <div class="font-13 w-600 link-title">
-          Agent messages
-        </div>
-      </a>
-
-      <a
-        *ngIf="isUserAdmin"
-        [routerLink]="['/agents']"
-        #rlaAgents="routerLinkActive"
-        [routerLinkActive]="['active']"
-        class="layout horizontal center sidebar-link"
-      >
-        <div class="layout horizontal center-center sidebar-icons">
-          <img
-            src="{{ rlaAgents.isActive ? icon.activeAgents : icon.agents }}"
-            class="icon select-none"
-          />
-        </div>
-        <div class="font-13 w-600 link-title">
-          Agents
-        </div>
-      </a>
-
-      <a
         [routerLink]="['/users']"
-        #rlaClients="routerLinkActive"
+        #rlaUsers="routerLinkActive"
         [routerLinkActive]="['active']"
         class="layout horizontal center sidebar-link"
       >
         <div class="layout horizontal center-center sidebar-icons">
           <img
-            src="{{ rlaClients.isActive ? icon.activeClients : icon.clients }}"
+            src="{{ rlaUsers.isActive ? icon.activeClients : icon.clients }}"
             class="icon select-none"
           />
         </div>
         <div class="font-13 w-600 link-title">
           Users
-        </div>
-      </a>
-
-      <a
-        *ngIf="isUserAdmin"
-        [routerLink]="['/payment']"
-        #rlaPayment="routerLinkActive"
-        [routerLinkActive]="['active']"
-        class="layout horizontal center sidebar-link"
-      >
-        <div class="layout horizontal center-center sidebar-icons">
-          <img
-            src="{{ rlaPayment.isActive ? icon.activePayment : icon.payment }}"
-            class="icon select-none"
-          />
-        </div>
-        <div class="font-13 w-600 link-title">
-          Payment
-        </div>
-      </a>
-
-      <a
-        [routerLink]="['/settings']"
-        #rlaSettings="routerLinkActive"
-        [routerLinkActive]="['active']"
-        class="layout horizontal center sidebar-link"
-      >
-        <div class="layout horizontal center-center sidebar-icons">
-          <img
-            src="{{
-              rlaSettings.isActive ? icon.activeSettings : icon.settings
-            }}"
-            class="icon select-none"
-          />
-        </div>
-        <div class="font-13 w-600 link-title">
-          Settings
         </div>
       </a>
     </div>
