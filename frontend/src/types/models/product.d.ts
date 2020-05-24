@@ -8,4 +8,5 @@ interface IProduct {
   description: string;
   imageUrl?: string;
   userId: string;
+  _id: string;
 }

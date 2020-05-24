@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { map } from 'rxjs/operators';
 import { Observable } from "rxjs";
 
 import { API_CART } from "../api-routes";
@@ -8,8 +9,8 @@ import { API_CART } from "../api-routes";
 export class CartService {
   constructor(private http: HttpClient) {}
 
-  public getCart(): Observable<any> {
-    return this.http.get<any>(API_CART.GET);
+  public getCart(): Observable<IMongoCart> {
+    return this.http.get<IMongoCart>(API_CART.GET);
   }
 
   public addToCart(productId: string): Observable<any> {

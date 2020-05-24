@@ -5,26 +5,22 @@ import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 
 import { ToastService } from "src/app/modules/toasts/toast.service";
-import * as productActions from "./product.actions";
-import { ProductService } from "src/app/common";
+import * as productActions from "./cart.actions";
+import { CartService } from "src/app/common";
 
 @Injectable()
-export class ProductEffect {
+export class CartEffect {
   @Effect()
-  getProducts$: Observable<Action> = this.actions$.pipe(
-    ofType<productActions.LoadProducts>(
-      productActions.ProductActionTypes.GET_PRODUCTS
-    ),
-    tap(() => this.store.dispatch(new productActions.StartRequestProduct())),
-    switchMap((loginUserAction: productActions.LoadProducts) =>
-      this.productService.getProducts().pipe(
-        map(
-          (result: IProduct[]) => new productActions.LoadProductsSuccess(result)
-        ),
+  getCart$: Observable<Action> = this.actions$.pipe(
+    ofType<productActions.LoadCart>(productActions.CartActionTypes.GET_CART),
+    tap(() => this.store.dispatch(new productActions.StartRequestCart())),
+    switchMap((loginUserAction: productActions.LoadCart) =>
+      this.cartService.getCart().pipe(
+        map((result: IMongoCart) => new productActions.LoadCartSuccess(result)),
         catchError((err: any) => {
           this.callToaster(err);
-          this.store.dispatch(new productActions.LoadProductsFail());
-          return of(new productActions.ErrorProduct(err));
+          this.store.dispatch(new productActions.LoadCartFail());
+          return of(new productActions.ErrorCart(err));
         })
       )
     )
@@ -33,7 +29,7 @@ export class ProductEffect {
   constructor(
     private actions$: Actions,
     private toastService: ToastService,
-    private productService: ProductService,
+    private cartService: CartService,
     private store: Store<IAppState>
   ) {}
 

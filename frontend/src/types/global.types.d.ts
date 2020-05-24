@@ -18,10 +18,17 @@ interface IProductState {
   error: any;
 }
 
+interface ICartState {
+  data: IMongoCart | null;
+  loading: boolean;
+  error: any;
+}
+
 interface IAppState {
   profileState: IProfileState;
   spinnerState: ISpinnerState;
   productState: IProductState;
+  cartState: ICartState;
 }
 
 type IStripe = any;
