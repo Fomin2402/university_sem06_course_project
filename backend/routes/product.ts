@@ -14,6 +14,9 @@ const productExpresssions: ValidationChain[] = [
 // PATH: /product/*
 const router = express.Router();
 
+router.get('/', productController.getProducts);
+router.get('/:productId', productController.getProductById);
+
 router.post(
     '/',
     productExpresssions,
@@ -31,10 +34,5 @@ router.patch(
 );
 
 router.delete('/:productId', isAuth, isAdmin, productController.deleteProduct);
-
-// ------------------------------------------------------------
-// old
-router.get('/', isAuth, productController.getEditProduct);
-router.get('/:productId', isAuth, productController.getEditProduct);
 
 export = router;

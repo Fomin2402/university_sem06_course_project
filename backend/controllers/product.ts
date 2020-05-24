@@ -5,6 +5,55 @@ import * as fileHelper from '../utils/file';
 import { customCheck, checkValidationResult } from '../utils/check';
 import { Product, IProduct } from '../models/product';
 
+export const getProducts = (
+    req: Request<any>,
+    res: Response<any>,
+    next: NextFunction
+) => {
+    Product.find()
+        .then((products) => {
+            customCheck({
+                check: !!products,
+                errorMessage: 'Products not found.',
+                errorCode: 404,
+            });
+
+            res.json({
+                products,
+            });
+        })
+        .catch((err) => {
+            const error = new Error(err);
+            (error as any).httpStatusCode = 500;
+            return next(error);
+        });
+};
+
+export const getProductById = (
+    req: Request<any>,
+    res: Response<any>,
+    next: NextFunction
+) => {
+    const prodId: string = req.params.productId;
+    Product.findById(prodId)
+        .then((product) => {
+            customCheck({
+                check: !!product,
+                errorMessage: `Product with id: ${prodId} not found.`,
+                errorCode: 404,
+            });
+
+            res.json({
+                product,
+            });
+        })
+        .catch((err) => {
+            const error = new Error(err);
+            (error as any).httpStatusCode = 500;
+            return next(error);
+        });
+};
+
 export const postProduct = (
     req: Request<any>,
     res: Response<any>,
@@ -133,34 +182,5 @@ export const deleteProduct = (
         })
         .catch((err) => {
             res.status(500).json({ message: 'Deleting product failed.' });
-        });
-};
-
-// TODO: udpate later
-export const getEditProduct = (
-    req: Request<any>,
-    res: Response<any>,
-    next: NextFunction
-) => {
-    const editMode = req.query.edit;
-    if (!editMode) {
-        return res.redirect('/');
-    }
-    const prodId = req.params.productId;
-    Product.findById(prodId)
-        .then((product) => {
-            if (!product) {
-                return res.redirect('/');
-            }
-            res.json({
-                product,
-                errorMessage: null,
-                validationErrors: [],
-            });
-        })
-        .catch((err) => {
-            const error = new Error(err);
-            (error as any).httpStatusCode = 500;
-            return next(error);
         });
 };
