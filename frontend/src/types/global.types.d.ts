@@ -24,11 +24,18 @@ interface ICartState {
   error: any;
 }
 
+interface IOrderState {
+  data: IMongoOrder[];
+  loading: boolean;
+  error: any;
+}
+
 interface IAppState {
   profileState: IProfileState;
   spinnerState: ISpinnerState;
   productState: IProductState;
   cartState: ICartState;
+  orderState: IOrderState;
 }
 
 type IStripe = any;
