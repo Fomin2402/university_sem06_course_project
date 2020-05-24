@@ -23,11 +23,17 @@ export const API_ORDER: IOrderAPI = {
 };
 
 export const API_PRODUCT: IProductAPI = {
-    GET_PRODUCTS: "product",
-    GET_PRODUCT_BY_ID: (productId: string) => `product/${productId}`,
-    POST_PRODUCT: "product",
-    PATCH_PRODUCT: (productId: string) => `product/${productId}`,
-    DELEETE_PRODUCT: (productId: string) => `product/${productId}`,
+  GET_PRODUCTS: "product",
+  GET_PRODUCT_BY_ID: (productId: string) => `product/${productId}`,
+  POST_PRODUCT: "product",
+  PATCH_PRODUCT: (productId: string) => `product/${productId}`,
+  DELEETE_PRODUCT: (productId: string) => `product/${productId}`,
 };
 
-export const API_MEDIA: 'images' = 'images';
+export const API_USER: IUserAPI = {
+  GET_MYSELF: "user/me",
+  GET_USER_BY_ID: (userId: string) => `user/${userId}`,
+  GET_USERS: "user",
+};
+
+export const API_MEDIA: "images" = "images";
