@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "assets/styles/reset";
+@import "assets/styles/fonts";
+@import "assets/styles/flex-layout";
+
+@import "assets/styles/new-custom-input";
+@import "assets/styles/new-custom-links";
+@import "assets/styles/new-custom-buttons";
+@import "assets/styles/new-custom-scrollbar";
+
+body,
+html {
+    height: 100%;
+}
