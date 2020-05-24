@@ -1,20 +1,27 @@
 type IndexedObject = {
-    [key: string]: any;
+  [key: string]: any;
 };
 
 interface IProfileState {
-    user: IUser | null;
-    loading: boolean;
-    error: Error | null;
+  user: IUser | null;
+  loading: boolean;
+  error: Error | null;
 }
 
 interface ISpinnerState {
-    display: boolean;
+  display: boolean;
+}
+
+interface IProductState {
+  data: IProduct[];
+  loading: boolean;
+  error: any;
 }
 
 interface IAppState {
-    profileState: IProfileState;
-    spinnerState: ISpinnerState;
+  profileState: IProfileState;
+  spinnerState: ISpinnerState;
+  productState: IProductState;
 }
 
 type IStripe = any;

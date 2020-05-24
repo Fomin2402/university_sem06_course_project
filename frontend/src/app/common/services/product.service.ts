@@ -3,13 +3,16 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
 import { API_PRODUCT } from "../api-routes";
+import { tap, map } from "rxjs/operators";
 
 @Injectable()
 export class ProductService {
   constructor(private http: HttpClient) {}
 
-  public getProducts(): Observable<any> {
-    return this.http.get<any>(API_PRODUCT.GET_PRODUCTS);
+  public getProducts(): Observable<IProduct[]> {
+    return this.http
+      .get<IProductsShell>(API_PRODUCT.GET_PRODUCTS)
+      .pipe(map((res: IProductsShell) => res.products));
   }
 
   public getProductById(orderId: string): Observable<any> {
