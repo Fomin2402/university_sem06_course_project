@@ -30,12 +30,6 @@ const routes: Routes = [
           ),
       },
       {
-        path: "admin",
-        canActivate: [AdminGuard],
-        loadChildren: () =>
-          import("../pages/admin/admin.module").then((m: any) => m.AdminModule),
-      },
-      {
         path: "users",
         canActivate: [AdminGuard],
         loadChildren: () =>
