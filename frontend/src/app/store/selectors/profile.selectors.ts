@@ -27,6 +27,14 @@ export const getUserProfileId: MemoizedSelector<
   return null;
 });
 
+export const getUserIsAdmin: MemoizedSelector<
+  IAppState,
+  boolean
+> = createSelector(getUserProfile, (user: IUser | null) => {
+  const { isAdmin = false } = { ...user };
+  return isAdmin;
+});
+
 export const getUserProfileLoading: MemoizedSelector<
   IAppState,
   boolean

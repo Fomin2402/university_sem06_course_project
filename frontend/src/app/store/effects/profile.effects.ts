@@ -22,8 +22,27 @@ export class ProfileEffect {
       this.authService.login(loginUserAction.payload).pipe(
         map((user: IUser) => new profileActions.LoginUserSuccess(user)),
         catchError((err: any) => {
-          this.toastService.add({ msg: "Error" });
+          this.callToaster(err);
           this.store.dispatch(new profileActions.LoginUserFail());
+          return of(new profileActions.ErrorUserProfile(err));
+        })
+      )
+    )
+  );
+
+  @Effect()
+  logout$: Observable<Action> = this.actions$.pipe(
+    ofType<profileActions.LogoutUser>(
+      profileActions.ProfileActionTypes.LOGOUT_USER
+    ),
+    tap(() =>
+      this.store.dispatch(new profileActions.StartRequestUserProfile())
+    ),
+    switchMap(() =>
+      this.authService.logout().pipe(
+        map(() => new profileActions.LogoutUserSuccess()),
+        catchError((err: any) => {
+          this.store.dispatch(new profileActions.LogoutUserFail());
           return of(new profileActions.ErrorUserProfile(err));
         })
       )
@@ -65,4 +84,19 @@ export class ProfileEffect {
     private userService: UserService,
     private store: Store<IAppState>
   ) {}
+
+  private callToaster(err: any): void {
+    const msg: any = err.error.errors || "Something went wrong";
+    if (typeof msg === "string") {
+      this.toastService.add({ msg });
+    }
+
+    if (Array.isArray(msg)) {
+      msg.forEach((item: any) => {
+        if (typeof item === "string") {
+          this.toastService.add({ msg: item });
+        }
+      });
+    }
+  }
 }

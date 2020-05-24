@@ -8,6 +8,10 @@ export enum ProfileActionTypes {
   LOGIN_USER_SUCCESS = "[Profile] Login User Success",
   LOGIN_USER_FAIL = "[Profile] Login User Fail",
 
+  LOGOUT_USER = "[Profile] Logout User",
+  LOGOUT_USER_SUCCESS = "[Profile] Logout User Success",
+  LOGOUT_USER_FAIL = "[Profile] Logout User Fail",
+
   GET_USER_PROFILE = "[Profile] Load User Profile",
   GET_USER_PROFILE_SUCCESS = "[Profile] Load User Profile Success",
   GET_USER_PROFILE_FAIL = "[Profile] Load User Profile Fail",
@@ -22,6 +26,19 @@ export class ErrorUserProfile implements Action {
     ProfileActionTypes.ERROR_USER_PROFILE;
 
   constructor(public payload: Error) {}
+}
+
+export class LogoutUser implements Action {
+  readonly type: ProfileActionTypes.LOGOUT_USER =
+    ProfileActionTypes.LOGOUT_USER;
+}
+export class LogoutUserSuccess implements Action {
+  readonly type: ProfileActionTypes.LOGOUT_USER_SUCCESS =
+    ProfileActionTypes.LOGOUT_USER_SUCCESS;
+}
+export class LogoutUserFail implements Action {
+  readonly type: ProfileActionTypes.LOGOUT_USER_FAIL =
+    ProfileActionTypes.LOGOUT_USER_FAIL;
 }
 
 export class LoginUser implements Action {
@@ -61,6 +78,9 @@ export type ProfileAction =
   | LoginUser
   | LoginUserSuccess
   | LoginUserFail
+  | LogoutUser
+  | LogoutUserSuccess
+  | LogoutUserFail
   | LoadProfile
   | LoadProfileSuccess
   | LoadProfileFail;
