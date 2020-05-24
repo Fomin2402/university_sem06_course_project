@@ -29,3 +29,9 @@ interface IProductAPI {
   PATCH_PRODUCT: (productId: string) => string;
   DELEETE_PRODUCT: (productId: string) => string;
 }
+
+interface IUserAPI {
+  GET_MYSELF: "user/me";
+  GET_USER_BY_ID: (userId: string) => string;
+  GET_USERS: "user";
+}

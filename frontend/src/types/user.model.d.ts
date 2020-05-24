@@ -1,3 +1,5 @@
 interface IUser {
-    email: string;
+  email: string;
+  isAdmin: boolean;
+  _id: string;
 }

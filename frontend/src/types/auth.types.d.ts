@@ -3,9 +3,8 @@ interface IProfileCreditionals {
   password: string;
 }
 
-interface ILoignResponse {
+interface ILoignResponse extends IUser {
   token: string;
-  userId: string;
 }
 
 interface ISignUpParams {
