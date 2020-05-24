@@ -10,7 +10,7 @@ export const getMeByToken = (
 ) => {
     const userId: string = (req as any).userId;
     User.findById(userId)
-        .select('email isAdmin')
+        .select('email isAdmin _id')
         .then((user: IUser) => {
             customCheck({
                 check: !!user,

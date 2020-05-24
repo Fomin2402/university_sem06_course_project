@@ -84,7 +84,9 @@ export const postLogin = (
             );
             res.status(200).json({
                 token: token,
-                userId: loadedUser._id.toString(),
+                _id: loadedUser._id.toString(),
+                email: loadedUser.email,
+                isAdmin: loadedUser.isAdmin
             });
         })
         .catch((err) => {
