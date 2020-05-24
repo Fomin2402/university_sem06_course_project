@@ -1,0 +1,23 @@
+@import "new-color-palette";
+
+// SPINNERS STYLES
+.spinner {
+    // Common styles
+    width: 4rem;
+    height: 4rem;
+    // Individual styles
+    border: 3px solid $white;
+    border-top-color: $main-color;
+    border-radius: 50%;
+    animation: rotation 0.8s ease infinite;
+}
+
+// ANIMATIONS
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

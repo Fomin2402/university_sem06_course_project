@@ -1,0 +1,146 @@
+@font-face {
+    font-family: "Gilroy";
+    src: url(assets/fonts/Gilroy-ExtraBold.otf);
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: "Gilroy";
+    src: url(assets/fonts/Gilroy-Bold.otf);
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Gilroy";
+    src: url(assets/fonts/Gilroy-SemiBold.otf);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "Gilroy";
+    src: url(assets/fonts/Gilroy-Regular.otf);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Gilroy";
+    src: url(assets/fonts/Gilroy-Light.otf);
+    font-weight: 300;
+}
+
+.font-42 {
+    font-style: normal;
+    font-size: 42px;
+}
+
+.font-34 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 34px;
+}
+
+.font-28 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 28px;
+}
+
+.font-24 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+}
+
+.font-20 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+}
+
+.font-18 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+}
+
+.font-16 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+.font-15 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+}
+
+.font-14 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.font-13 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+}
+
+.font-12 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.font-11 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+}
+
+.w-100 {
+    font-weight: 100;
+}
+
+.w-200 {
+    font-weight: 200;
+}
+
+.w-300 {
+    font-weight: 300;
+}
+
+.w-400 {
+    font-weight: 400;
+}
+
+.w-500 {
+    font-weight: 500;
+}
+
+.w-600 {
+    font-weight: 600;
+}
+
+.w-700 {
+    font-weight: 700;
+}
+
+.w-800 {
+    font-weight: 800;
+}
+
+h1,
+h2,
+h3,
+h4,
+a,
+p,
+span,
+div,
+input,
+textarea,
+button {
+    font-family: "Gilroy", Arial, Helvetica, sans-serif;
+}

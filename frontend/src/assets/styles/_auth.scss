@@ -1,0 +1,45 @@
+@import "new-global-variables";
+@import "new-color-palette";
+
+$conent-max-width: 370px;
+$conent-width: 95%;
+
+$logo-margin-bottom: 30px;
+$logo-title-margin-top: 1.75vh;
+$logo-image-size: 10vh;
+
+$submit-margin-bottom: 20px;
+
+$bottom-link-margin-bottom: 16px;
+$bottom-margin-bottom: 20px;
+
+$additional-info-margin-bottom: 32px;
+$additional-info-width: 95%;
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    box-shadow: $input-background-color;
+    -webkit-box-shadow: 0 0 0 50px $input-background-color inset;
+    -webkit-text-fill-color: $black;
+}
+
+.logo .title {
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 45px;
+    line-height: 55px;
+    letter-spacing: 0.07em;
+}
+
+@media screen and (max-width: 600px), screen and (max-height: 850px) {
+    .auth-page .main .body {
+        .logo .title {
+            font-size: 25px;
+        }
+
+        .additional-info.short {
+            font-size: 20px;
+        }
+    }
+}

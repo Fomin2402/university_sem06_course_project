@@ -1,0 +1,91 @@
+$white: #fff;
+$black: #000;
+
+$grey: #9e9e9e;
+$default-img-color: #c8c7cc;
+$default-img-color-hover: #949397;
+
+$main-background: #fafafa;
+
+$main-color: #203463;
+$main-light-color: #70ceeb;
+$main-color-hover: #1a1a1a;
+
+$input-border-color: #dddddd;
+$input-background-color: #f3f3f3;
+$input-color: #f3f3f3;
+
+$input-title-color: #666666;
+$input-placeholder-color: #b3b3b3;
+$input-addition-text-color: #666666;
+
+$red-notification: #f74553;
+
+// -----------------------------------------------------------------------------
+// CALENDAR EVENT POPOVER
+$red-notification-lighten: rgba(247, 69, 84, 0.1);
+$grey-lighten: rgba(224, 224, 224, 0.3);
+$grey-lighten-hover: rgba(224, 224, 224, 0.5);
+
+$main-color-lighten: rgba(86, 204, 242, 0.25);
+$main-color-lighten-hover: rgba(86, 204, 242, 0.5);
+
+// -----------------------------------------------------------------------------
+// FORGOT PASS?
+
+$text-color: rgba(0, 0, 0, 0.8);
+
+$bottom-addition-text-color: #b3b3b3;
+
+// -----------------------------------------------------------------------------
+// SHELL
+
+$shell-border-color: rgba(151, 151, 151, 0.15);
+$shell-color: rgba(0, 0, 0, 0.54);
+
+// -----------------------------------------------------------------------------
+// MAIN CONTAINER
+
+$main-container-border-color: #979797;
+$main-container-lighten-border-color: rgba(151, 151, 151, 0.14);
+
+// -----------------------------------------------------------------------------
+// SCROLLBAR
+
+$scrollbar-background: #c3c3c3;
+$scrollbar-track: #eeeeee;
+
+// -----------------------------------------------------------------------------
+// TABLE
+
+$table-header-background: #f7f7f7;
+$table-header-color: gba(0, 0, 0, 0.3);
+$table-row-color-1: $black;
+$table-row-color-2: rgba(0, 0, 0, 0.54);
+$table-row-color-3: #747474;
+
+// -----------------------------------------------------------------------------
+// CHAT
+
+$list-background-hover: #f6f6f6;
+$list-active-item-color: rgba(255, 255, 255, 0.54);
+
+$list-item-color: rgba(0, 0, 0, 0.54);
+
+$chat-message-interlocutor-background-: rgba(179, 179, 179, 0.2);
+$chat-message-main-background: rgba(112, 206, 235, 0.3);
+
+$message-myself-background: rgba(84, 203, 242, 0.3);
+$message-interlocutor-background: rgba(179, 179, 179, 0.2);
+
+// -----------------------------------------------------------------------------
+// CALENDAR
+
+$event-background-: rgba(179, 179, 179, 0.2);
+$event-main-background: rgba(112, 206, 235, 0.3);
+
+$calendar-main-container-border-color: rgba(114, 114, 114, 0.14);
+$calendar-border-color: #eaeaea;
+
+$week-hours-background: #f8f8f8;
+$week-hours-color: rgba(0, 0, 0, 0.54);

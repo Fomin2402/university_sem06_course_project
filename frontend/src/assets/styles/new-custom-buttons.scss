@@ -1,0 +1,187 @@
+@import "new-global-variables";
+@import "new-color-palette";
+
+$normal-height: 46px;
+$small-height: 32px;
+
+$ligth-button-border-radius: 4px;
+
+button.new-filled-submit {
+    box-sizing: border-box;
+    width: calc(100% - 2px);
+    height: $normal-height;
+    background-color: $main-color;
+    border-radius: $classic-button-border-radius;
+    border: $classic-button-border;
+    color: $white;
+    transition: $transition;
+
+    &:hover {
+        background-color: $white;
+        color: $main-color;
+    }
+
+    &.darker:hover {
+        color: darken($white, 25%);
+        background-color: darken($main-color, 25%);
+        border-color: darken($main-color, 25%);
+    }
+
+    &.disabled {
+        background-color: $main-color;
+    }
+}
+
+button.new-submit {
+    box-sizing: border-box;
+    width: calc(100% - 2px);
+    height: $normal-height;
+    background-color: transparent;
+    border-radius: $classic-button-border-radius;
+    border: $classic-button-border;
+    color: $main-color;
+    transition: $transition;
+
+    &:hover {
+        color: $white;
+        background-color: $main-color;
+    }
+
+    &.darker:hover {
+        color: darken($main-color, 25%);
+        background-color: transparent;
+        border-color: darken($main-color, 25%);
+    }
+
+    &.disabled {
+        background-color: transparent;
+    }
+}
+
+button.new-filled-cancel {
+    box-sizing: border-box;
+    width: calc(100% - 2px);
+    height: $normal-height;
+    background-color: $red-notification;
+    border-radius: $classic-button-border-radius;
+    border: $classic-button-border;
+    color: $white;
+    border-color: $red-notification;
+    transition: $transition;
+
+    &:hover {
+        background-color: $white;
+        color: $red-notification;
+    }
+
+    &.darker:hover {
+        color: darken($white, 25%);
+        background-color: darken($red-notification, 25%);
+        border-color: darken($red-notification, 25%);
+    }
+
+    &.disabled {
+        background-color: $red-notification;
+    }
+}
+
+button.new-cancel {
+    box-sizing: border-box;
+    width: calc(100% - 2px);
+    height: $normal-height;
+    background-color: transparent;
+    border-radius: $classic-button-border-radius;
+    border: $classic-button-border;
+    color: $red-notification;
+    border-color: $red-notification;
+    transition: $transition;
+
+    &:hover {
+        background-color: $red-notification;
+        color: $white;
+    }
+
+    &.darker:hover {
+        color: darken($red-notification, 25%);
+        background-color: transparent;
+        border-color: darken($red-notification, 25%);
+    }
+
+    &.disabled {
+        background-color: transparent;
+    }
+}
+
+button.light-submit {
+    border: 0;
+    height: 30px;
+    border-radius: $ligth-button-border-radius;
+    background-color: $grey-lighten;
+    color: $main-color;
+    transition: $transition;
+
+    &:hover {
+        background-color: $main-color-lighten;
+    }
+}
+
+button.light-cancel {
+    border: 0;
+    height: 30px;
+    border-radius: $ligth-button-border-radius;
+    background: $white;
+    color: $red-notification;
+    transition: $transition;
+
+    &:hover {
+        background-color: $red-notification-lighten;
+    }
+}
+
+/*
+button.accept {
+    border: 0;
+    height: 30px;
+    border-radius: $border-radius;
+    background: $light-blue;
+    color: $main-blue;
+    transition: $transition;
+
+    &:hover {
+        background-color: $opacity-blue;
+    }
+}
+
+button.white {
+    border: 0;
+    height: 30px;
+    border-radius: $border-radius;
+    background: $white;
+    color: $black;
+    border: $border-grey;
+    transition: $transition;
+
+    &:hover {
+        background-color: $light-grey;
+    }
+}
+
+button.remove {
+    border: 0;
+    height: 30px;
+    border-radius: $border-radius;
+    background: $white;
+    color: $black;
+    transition: $transition;
+
+    &:hover {
+        color: $red;
+    }
+}
+
+*/
+@media screen and #{$max-height} {
+    button.submit {
+        height: $small-height;
+    }
+}

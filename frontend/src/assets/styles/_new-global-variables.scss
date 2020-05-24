@@ -1,0 +1,74 @@
+@import "new-color-palette";
+
+$max-height: "(max-height: 1025px)";
+$max-width: "(max-width: 800px)";
+
+$transition: 0.25s;
+
+$icon-size: 24px;
+
+// -----------------------------------------------------------------------------
+// BORDERS
+
+$main-border-style: solid;
+$main-border-width: 1px;
+
+$second-input-border-radius: 21px;
+$classic-input-border-radius: 10px;
+$classic-input-border: $main-border-width $main-border-style $input-border-color;
+
+$classic-button-border-radius: 27px;
+$classic-button-border: $main-border-width $main-border-style $main-color;
+
+// -----------------------------------------------------------------------------
+// SHADOWS
+
+$shadow-second: 0px 3px 8px rgba(0, 0, 0, 0.14);
+
+// -----------------------------------------------------------------------------
+// SHELL
+
+$shell-header-height: 90px;
+$shell-small-header-height: 60px;
+
+$shell-border: $main-border-width $main-border-style $shell-border-color;
+
+$shell-dropdown-width: 180px;
+$shell-dropdown-border-radius: 4px;
+$shell-dropdown-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.14);
+$shell-dropdown-border: $main-border-width $main-border-style
+    $calendar-main-container-border-color;
+$shell-dropdown-name-border: $main-border-width $main-border-style
+    $calendar-border-color;
+
+// -----------------------------------------------------------------------------
+// SIDEBAR
+
+$box-shadow-sidebar: 0px 16px 16px rgba(0, 0, 0, 0.24),
+    0px 0px 16px rgba(0, 0, 0, 0.18);
+
+$sidebar-active-link-border-size: 4px;
+$sidebar-link-space-between-border-and-icon: 20px;
+
+$small-sidebar-link-space-between-border-and-icon: 10px;
+
+$side-bar-icon-box-width: 2 *
+    (
+        $sidebar-link-space-between-border-and-icon +
+            $sidebar-active-link-border-size
+    ) + $icon-size;
+
+$small-side-bar-icon-box-width: 2 *
+    (
+        $small-sidebar-link-space-between-border-and-icon +
+            $sidebar-active-link-border-size
+    ) + $icon-size;
+
+$sidebar-width: 256px;
+$small-sidebar-width: 180px;
+
+$hide-sidebar: -$sidebar-width + $side-bar-icon-box-width;
+$small-hide-sidebar: -$small-sidebar-width + $small-side-bar-icon-box-width;
+
+$indentation-for-sidebar: $sidebar-width + $hide-sidebar;
+$small-indentation-for-sidebar: $small-sidebar-width + $small-hide-sidebar;

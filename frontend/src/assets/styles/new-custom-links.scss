@@ -1,0 +1,11 @@
+@import "new-global-variables";
+@import "new-color-palette";
+
+.classic-link {
+    color: $main-color;
+    transition: $transition;
+
+    &:hover {
+        color: $main-color-hover;
+    }
+}
