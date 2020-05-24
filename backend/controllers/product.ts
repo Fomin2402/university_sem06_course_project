@@ -45,35 +45,6 @@ export const postProduct = (
         });
 };
 
-// TODO: udpate later
-export const getEditProduct = (
-    req: Request<any>,
-    res: Response<any>,
-    next: NextFunction
-) => {
-    const editMode = req.query.edit;
-    if (!editMode) {
-        return res.redirect('/');
-    }
-    const prodId = req.params.productId;
-    Product.findById(prodId)
-        .then((product) => {
-            if (!product) {
-                return res.redirect('/');
-            }
-            res.json({
-                product,
-                errorMessage: null,
-                validationErrors: [],
-            });
-        })
-        .catch((err) => {
-            const error = new Error(err);
-            (error as any).httpStatusCode = 500;
-            return next(error);
-        });
-};
-
 export const patchProduct = (
     req: Request<any>,
     res: Response<any>,
@@ -132,7 +103,6 @@ export const patchProduct = (
         });
 };
 
-// TODO: udpate later
 export const deleteProduct = (
     req: Request<any>,
     res: Response<any>,
@@ -148,12 +118,14 @@ export const deleteProduct = (
                 errorCode: 404,
             });
 
-            fileHelper.deleteFile(product.imageUrl);
+            if (product.imageUrl) {
+                fileHelper.deleteFile(product.imageUrl);
+            }
 
-            // TODO: update delete query
+            // TODO: check if it delete from cart too
             return Product.deleteOne({
                 _id: prodId,
-                userId: (req as any).user._id,
+                userId: (req as any).userId,
             });
         })
         .then(() => {
@@ -161,5 +133,34 @@ export const deleteProduct = (
         })
         .catch((err) => {
             res.status(500).json({ message: 'Deleting product failed.' });
+        });
+};
+
+// TODO: udpate later
+export const getEditProduct = (
+    req: Request<any>,
+    res: Response<any>,
+    next: NextFunction
+) => {
+    const editMode = req.query.edit;
+    if (!editMode) {
+        return res.redirect('/');
+    }
+    const prodId = req.params.productId;
+    Product.findById(prodId)
+        .then((product) => {
+            if (!product) {
+                return res.redirect('/');
+            }
+            res.json({
+                product,
+                errorMessage: null,
+                validationErrors: [],
+            });
+        })
+        .catch((err) => {
+            const error = new Error(err);
+            (error as any).httpStatusCode = 500;
+            return next(error);
         });
 };

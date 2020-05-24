@@ -1,4 +1,4 @@
-import { body, ValidationChain } from 'express-validator';
+import { body, ValidationChain, param } from 'express-validator';
 import express from 'express';
 
 import * as productController from '../controllers/product';
@@ -30,11 +30,11 @@ router.patch(
     productController.patchProduct
 );
 
+router.delete('/:productId', isAuth, isAdmin, productController.deleteProduct);
+
 // ------------------------------------------------------------
 // old
 router.get('/', isAuth, productController.getEditProduct);
 router.get('/:productId', isAuth, productController.getEditProduct);
-
-router.delete('/:productId', isAuth, productController.deleteProduct);
 
 export = router;
