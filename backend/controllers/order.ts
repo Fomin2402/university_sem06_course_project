@@ -4,12 +4,12 @@ import STRIPE from 'stripe';
 import path from 'path';
 import fs from 'fs';
 
+import * as config from '../../global/env.json';
 import { customCheck } from '../utils/check';
 import { Order, IOrder } from '../models/order';
 import { User, IUser } from '../models/user';
 
-// TODO: update stripe key
-const stripe = new STRIPE('sk_test_CrxFLdz8NPTC8EIpXVbPQoA1000HfoGTlO', {
+const stripe = new STRIPE(config.stripe.SK, {
     apiVersion: null,
 });
 
