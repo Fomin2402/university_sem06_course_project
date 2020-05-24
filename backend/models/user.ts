@@ -1,16 +1,24 @@
 import mongoose, { Schema } from 'mongoose';
+import { IProduct } from './product';
 
-export interface ICart {
-    items: any[];
+export interface ICartItem {
+    productId: string;
+    quantity: number;
 }
 
 export interface IUser extends mongoose.Document {
     email: string;
     password: string;
+    cart: {
+        items: ICartItem[];
+    };
     isAdmin?: boolean;
     resetToken?: string;
     resetTokenExpiration?: Date | any;
-    cart?: ICart;
+
+    addToCart: (product: IProduct) => any;
+    removeFromCart: (productId: string) => any;
+    clearCart: (product: IProduct) => any;
 }
 
 const userSchema = new Schema({
@@ -39,12 +47,14 @@ const userSchema = new Schema({
     },
 });
 
-userSchema.methods.addToCart = function (product) {
-    const cartProductIndex = this.cart.items.findIndex((cp) => {
-        return cp.productId.toString() === product._id.toString();
-    });
-    let newQuantity = 1;
-    const updatedCartItems = [...this.cart.items];
+userSchema.methods.addToCart = function (product: IProduct) {
+    const cartProductIndex: number = this.cart.items.findIndex(
+        (item: ICartItem) => {
+            return item.productId.toString() === product._id.toString();
+        }
+    );
+    let newQuantity: number = 1;
+    const updatedCartItems: ICartItem[] = [...this.cart.items];
 
     if (cartProductIndex >= 0) {
         newQuantity = this.cart.items[cartProductIndex].quantity + 1;
@@ -55,17 +65,21 @@ userSchema.methods.addToCart = function (product) {
             quantity: newQuantity,
         });
     }
-    const updatedCart = {
+
+    this.cart = {
         items: updatedCartItems,
     };
-    this.cart = updatedCart;
+
     return this.save();
 };
 
-userSchema.methods.removeFromCart = function (productId) {
-    const updatedCartItems = this.cart.items.filter((item) => {
-        return item.productId.toString() !== productId.toString();
-    });
+// TODO: add minus onee logic
+userSchema.methods.removeFromCart = function (productId: string) {
+    const updatedCartItems: ICartItem[] = this.cart.items.filter(
+        (item: ICartItem) => {
+            return item.productId.toString() !== productId.toString();
+        }
+    );
     this.cart.items = updatedCartItems;
     return this.save();
 };

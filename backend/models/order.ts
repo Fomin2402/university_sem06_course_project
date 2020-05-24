@@ -1,4 +1,18 @@
 import mongoose, { Schema } from 'mongoose';
+import { IProduct } from './product';
+
+interface IOrderItem {
+    product: IProduct;
+    quantity: number;
+}
+
+export interface IOrder extends mongoose.Document {
+    products: IOrderItem[];
+    user: {
+        email: string;
+        userId: string;
+    };
+}
 
 const orderSchema = new Schema({
     products: [
@@ -20,4 +34,4 @@ const orderSchema = new Schema({
     },
 });
 
-export = mongoose.model('Order', orderSchema);
+export const Order = mongoose.model('Order', orderSchema);

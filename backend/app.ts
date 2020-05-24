@@ -14,6 +14,7 @@ import * as config from '../global/env.json';
 import authRoutes from './routes/auth';
 import adminRoutes from './routes/admin';
 import producRoutes from './routes/product';
+import cartRoutes from './routes/cart';
 
 // TODO: old route
 import shopRoutes from './routes/shop';
@@ -87,6 +88,7 @@ app.use('/blablabla', (req, res, next) => {
 app.use(authRoutes);
 app.use('/admin', adminRoutes);
 app.use('/product', producRoutes);
+app.use('/cart', cartRoutes);
 
 // TODO: old route
 app.use(shopRoutes);

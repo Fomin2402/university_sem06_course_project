@@ -9,7 +9,7 @@
         "esModuleInterop": true,
         "resolveJsonModule": true,
         "removeComments": true,
-        "rootDir": "src",
+        "rootDir": ".",
     },
     "files": ["app.ts"],
     "lib": ["es2015"],

@@ -11,7 +11,7 @@ export const getProducts = (
     next: NextFunction
 ) => {
     Product.find()
-        .then((products) => {
+        .then((products: IProduct[]) => {
             customCheck({
                 check: !!products,
                 errorMessage: 'Products not found.',
@@ -36,7 +36,7 @@ export const getProductById = (
 ) => {
     const prodId: string = req.params.productId;
     Product.findById(prodId)
-        .then((product) => {
+        .then((product: IProduct) => {
             customCheck({
                 check: !!product,
                 errorMessage: `Product with id: ${prodId} not found.`,
