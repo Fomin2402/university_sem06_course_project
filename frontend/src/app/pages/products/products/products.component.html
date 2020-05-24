@@ -1,1 +1,14 @@
-<p>products works!</p>
+<div class="layout vertical border-box container">
+  <div
+    *ngFor="let product of products | async"
+    class="layout vertical center-cetner item"
+  >
+    <div class="font-24 w-500">{{ product.title }}</div>
+    <img
+      *ngIf="product.imageUrl"
+      [src]="'http://localhost:3000/' + product.imageUrl"
+      class="image"
+    />
+    <div>{{ product.price | currency }}</div>
+  </div>
+</div>

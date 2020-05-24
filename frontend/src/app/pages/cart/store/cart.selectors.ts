@@ -9,10 +9,10 @@ const getCartFeatureState: MemoizedSelector<
   ICartState
 > = createFeatureSelector<ICartState>("cartState");
 
-export const getCart: MemoizedSelector<IAppState, ICart> = createSelector(
-  getCartFeatureState,
-  (state: ICartState) => state.data
-);
+export const getCart: MemoizedSelector<
+  IAppState,
+  IMongoCart | null
+> = createSelector(getCartFeatureState, (state: ICartState) => state.data);
 
 export const getCartLoading: MemoizedSelector<
   IAppState,

@@ -1,0 +1,32 @@
+@import "new-global-variables";
+@import "new-color-palette";
+
+$max-image-size: 250px;
+
+:host(app-products) {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  padding: 50px;
+
+  .item {
+    padding: 25px;
+    background-color: $white;
+    margin-bottom: 25px;
+    box-shadow: $shadow-second;
+    transition: $transition;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $input-background-color;
+    }
+
+    .image {
+      max-height: $max-image-size;
+      max-width: $max-image-size;
+    }
+  }
+}

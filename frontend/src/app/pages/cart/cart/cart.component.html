@@ -1,1 +1,14 @@
-<p>cart works!</p>
+<div *ngIf="cart | async as cart$" class="layout vertical border-box container">
+  <div
+    *ngFor="let product of cart$.products"
+    class="layout vertical center-cetner item"
+  >
+    <div class="font-24 w-500">{{ product.productId.title }}</div>
+    <img
+      *ngIf="product.productId.imageUrl"
+      [src]="'http://localhost:3000/' + product.productId.imageUrl"
+      class="image"
+    />
+    <div>{{ product.productId.price | currency }} x {{ product.quantity }}</div>
+  </div>
+</div>
