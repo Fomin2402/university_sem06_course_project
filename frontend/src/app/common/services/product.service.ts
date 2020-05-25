@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
@@ -9,9 +9,9 @@ import { tap, map } from "rxjs/operators";
 export class ProductService {
   constructor(private http: HttpClient) {}
 
-  public getProducts(): Observable<IProduct[]> {
+  public getProducts(params: HttpParams): Observable<IProduct[]> {
     return this.http
-      .get<IProductsShell>(API_PRODUCT.GET_PRODUCTS)
+      .get<IProductsShell>(API_PRODUCT.GET_PRODUCTS, { params })
       .pipe(map((res: IProductsShell) => res.products));
   }
 

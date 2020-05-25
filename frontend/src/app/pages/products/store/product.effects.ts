@@ -7,6 +7,7 @@ import { Observable, of } from "rxjs";
 import { ToastService } from "src/app/modules/toasts/toast.service";
 import * as productActions from "./product.actions";
 import { ProductService } from "src/app/common";
+import { HttpParams } from "@angular/common/http";
 
 @Injectable()
 export class ProductEffect {
@@ -16,8 +17,12 @@ export class ProductEffect {
       productActions.ProductActionTypes.GET_PRODUCTS
     ),
     tap(() => this.store.dispatch(new productActions.StartRequestProduct())),
-    switchMap((loginUserAction: productActions.LoadProducts) =>
-      this.productService.getProducts().pipe(
+    switchMap((loadProducts: productActions.LoadProducts) => {
+      let params: HttpParams = new HttpParams();
+      if (loadProducts.payload && typeof loadProducts.payload === "string") {
+        params = params.append("search", loadProducts.payload);
+      }
+      return this.productService.getProducts(params).pipe(
         map(
           (result: IProduct[]) => new productActions.LoadProductsSuccess(result)
         ),
@@ -26,8 +31,8 @@ export class ProductEffect {
           this.store.dispatch(new productActions.LoadProductsFail());
           return of(new productActions.ErrorProduct(err));
         })
-      )
-    )
+      );
+    })
   );
 
   constructor(

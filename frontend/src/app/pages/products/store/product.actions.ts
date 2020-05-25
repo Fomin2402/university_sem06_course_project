@@ -25,6 +25,8 @@ export class ErrorProduct implements Action {
 export class LoadProducts implements Action {
   readonly type: ProductActionTypes.GET_PRODUCTS =
     ProductActionTypes.GET_PRODUCTS;
+
+  constructor(public payload?: string) {}
 }
 export class LoadProductsSuccess implements Action {
   readonly type: ProductActionTypes.GET_PRODUCTS_SUCCESS =

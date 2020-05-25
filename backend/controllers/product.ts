@@ -1,15 +1,17 @@
 import { NextFunction, Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 
-import * as fileHelper from '../utils/file';
 import { customCheck, checkValidationResult } from '../utils/check';
 import { Product, IProduct } from '../models/product';
+import * as fileHelper from '../utils/file';
 
 export const getProducts = (
     req: Request<any>,
     res: Response<any>,
     next: NextFunction
 ) => {
+    const search: string | undefined = req.query.search as any;
+
     Product.find()
         .then((products: IProduct[]) => {
             customCheck({
@@ -17,6 +19,12 @@ export const getProducts = (
                 errorMessage: 'Products not found.',
                 errorCode: 404,
             });
+
+            if (search) {
+                products = products.filter((item: IProduct) =>
+                    item.title.includes(search)
+                );
+            }
 
             res.json({
                 products,
