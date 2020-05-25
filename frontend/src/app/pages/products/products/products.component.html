@@ -1,14 +1,68 @@
 <div class="layout vertical border-box container">
-  <div
-    *ngFor="let product of products | async"
-    class="layout vertical center-cetner item"
-  >
-    <div class="font-24 w-500">{{ product.title }}</div>
-    <img
-      *ngIf="product.imageUrl"
-      [src]="'http://localhost:3000/' + product.imageUrl"
-      class="image"
-    />
-    <div>{{ product.price | currency }}</div>
+  <div class="layout horizontal header">
+    <div class="flex-1 layout vertical font-14 input-box">
+      <div class="new-field-input">
+        <input
+          [formControl]="search"
+          type="text"
+          placeholder="Search"
+          class="field radius-second resize"
+        />
+      </div>
+    </div>
+    <button
+      *ngIf="isAdmin | async"
+      [routerLink]="['create']"
+      type="submit"
+      class="border-box font-13 new-filled-submit"
+    >
+      ADD NEW PRODUCT
+    </button>
+  </div>
+
+  <div class="layout vertical list">
+    <div
+      *ngFor="let product of products | async"
+      class="layout horizontal center-cetner item"
+    >
+      <div *ngIf="!product.imageUrl" class="image"></div>
+      <img
+        *ngIf="product.imageUrl"
+        [src]="'http://localhost:3000/' + product.imageUrl"
+        class="image"
+      />
+      <div class="flex-1 layout vertical info">
+        <div class="font-24 w-500">{{ product.title }}</div>
+        <div>{{ product.price | currency }}</div>
+        <div class="flex-1 layout horizonts description">
+          {{ product.description }}
+        </div>
+      </div>
+      <div class="layout vertical action">
+        <button
+          (click)="addToCart(product)"
+          type="submit"
+          class="border-box font-13 new-filled-submit"
+        >
+          Add to cart
+        </button>
+        <button
+          *ngIf="isAdmin | async"
+          (click)="removeProduct(product)"
+          type="submit"
+          class="border-box font-13 new-filled-cancel"
+        >
+          Remove
+        </button>
+        <button
+          *ngIf="isAdmin | async"
+          [routerLink]="[product._id]"
+          type="submit"
+          class="border-box font-13 new-filled-submit"
+        >
+          Edit
+        </button>
+      </div>
+    </div>
   </div>
 </div>

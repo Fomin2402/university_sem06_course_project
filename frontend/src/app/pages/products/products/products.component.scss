@@ -1,6 +1,7 @@
 @import "new-global-variables";
 @import "new-color-palette";
 
+$add-button-width: 200px;
 $max-image-size: 250px;
 
 :host(app-products) {
@@ -10,23 +11,77 @@ $max-image-size: 250px;
 
 .container {
   width: 100%;
+  height: 100%;
   padding: 50px;
 
-  .item {
-    padding: 25px;
-    background-color: $white;
-    margin-bottom: 25px;
-    box-shadow: $shadow-second;
-    transition: $transition;
-
-    &:hover {
-      cursor: pointer;
-      background-color: $input-background-color;
+  .header {
+    .new-filled-submit {
+      width: $add-button-width;
+      margin-left: 25px;
     }
+    margin-bottom: 50px;
+  }
 
-    .image {
-      max-height: $max-image-size;
-      max-width: $max-image-size;
+  .list {
+    overflow-y: auto;
+    padding: 15px;
+    height: calc(100% - 100px);
+
+    .item {
+      padding: 25px;
+      background-color: $white;
+      margin-bottom: 25px;
+      box-shadow: $shadow-second;
+      transition: $transition;
+      & > * {
+        margin-right: 15px;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: $input-background-color;
+
+        div.image {
+          background-color: $input-placeholder-color;
+        }
+      }
+
+      .image {
+        height: $max-image-size;
+        width: $max-image-size;
+      }
+      div.image {
+        background-color: $input-background-color;
+        transition: $transition;
+      }
+
+      .info {
+        & > * {
+          margin-bottom: 15px;
+        }
+
+        .description {
+          padding: 5px;
+          border: $shell-dropdown-border;
+          border-color: $main-color;
+          margin-bottom: 0;
+        }
+      }
+
+      .action {
+        width: 150px;
+        & > * {
+          margin-bottom: 15px;
+        }
+        .new-filled-cancel:hover,
+        .new-filled-submit:hover {
+          background-color: transparent;
+        }
+      }
     }
   }
 }

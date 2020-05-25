@@ -1,0 +1,47 @@
+@import "new-global-variables";
+@import "new-color-palette";
+
+$add-button-width: 200px;
+$max-form-width: 750px;
+$max-image-size: 250px;
+
+:host(app-edit) {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  padding: 25px;
+
+  .form {
+    background-color: $white;
+    padding: 25px;
+    box-shadow: $shadow-second;
+    height: min-content;
+    max-width: $max-form-width;
+
+    .photo-action {
+      .image {
+        height: $max-image-size;
+        width: $max-image-size;
+      }
+
+      div.image {
+        background-color: $input-background-color;
+      }
+
+      button {
+        width: 150px;
+        margin-left: 20px;
+      }
+    }
+
+    .input-box {
+      .title {
+        padding: 7px;
+      }
+    }
+  }
+}

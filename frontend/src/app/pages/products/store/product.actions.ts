@@ -7,6 +7,8 @@ export enum ProductActionTypes {
   GET_PRODUCTS = "[Product] Get Products",
   GET_PRODUCTS_SUCCESS = "[Product] Get Products Success",
   GET_PRODUCTS_FAIL = "[Product] Get Products Fail",
+
+  REMOVE_PRODUCT = "[Product] Remove product",
 }
 
 export class StartRequestProduct implements Action {
@@ -35,9 +37,17 @@ export class LoadProductsFail implements Action {
     ProductActionTypes.GET_PRODUCTS_FAIL;
 }
 
+export class RemoveProduct implements Action {
+  readonly type: ProductActionTypes.REMOVE_PRODUCT =
+    ProductActionTypes.REMOVE_PRODUCT;
+
+  constructor(public payload: string) {}
+}
+
 export type ProductAction =
   | StartRequestProduct
   | ErrorProduct
   | LoadProducts
   | LoadProductsSuccess
-  | LoadProductsFail;
+  | LoadProductsFail
+  | RemoveProduct;

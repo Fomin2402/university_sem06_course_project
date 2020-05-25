@@ -33,6 +33,17 @@ export function productReducer(
       };
     }
 
+    case ProductActionTypes.REMOVE_PRODUCT: {
+      const data: IProduct[] = [...state.data].filter(
+        (item: IProduct) => item._id !== action.payload
+      );
+      return {
+        ...state,
+        loading: false,
+        data,
+      };
+    }
+
     default:
       return state;
   }

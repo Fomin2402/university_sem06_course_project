@@ -1,0 +1,92 @@
+<div class="border-box flex layout horizontal center-center container">
+  <form [formGroup]="form" class="flex-1 form">
+    <div class="layout horizontal center photo-action">
+      <input
+        #avatarInput
+        style="display: none;"
+        type="file"
+        accept="image/*"
+        (change)="changePhoto($event.target.files)"
+      />
+      <div *ngIf="!productImage" class="image select-none"></div>
+      <img
+        *ngIf="productImage"
+        [src]="productImage"
+        class="image select-none"
+      />
+      <div class="flex-1"></div>
+      <button (click)="avatarInput.click()" class="new-filled-submit">
+        Change image
+      </button>
+      <button (click)="clearPhoto()" class="new-filled-cancel">
+        Clear image
+      </button>
+    </div>
+
+    <div class="layout vertical font-15 input-box">
+      <label class="label font-13 title">Title</label>
+      <div class="new-field-input with-errors">
+        <input
+          formControlName="title"
+          placeholder="Title"
+          autocomplete="off"
+          name="title"
+          type="text"
+          class="field font-18"
+        />
+        <div
+          *ngIf="controlTitle.touched && controlTitle.errors?.required"
+          class="field-error font-15"
+        >
+          Title is required
+        </div>
+      </div>
+    </div>
+
+    <div class="layout vertical font-15 input-box">
+      <label class="label font-13 title">Price, $</label>
+      <div class="new-field-input with-errors">
+        <input
+          formControlName="price"
+          placeholder="Price"
+          autocomplete="off"
+          name="price"
+          type="number"
+          class="field font-18"
+        />
+        <div
+          *ngIf="controlPrice.touched && controlPrice.errors?.required"
+          class="field-error font-15"
+        >
+          Price is required
+        </div>
+      </div>
+    </div>
+
+    <div class="layout vertical font-15 input-box">
+      <label class="label font-13 title">Description</label>
+      <div class="new-field-input with-errors">
+        <input
+          formControlName="description"
+          placeholder="Description"
+          autocomplete="off"
+          name="Description"
+          type="text"
+          class="field font-18"
+        />
+        <div
+          *ngIf="
+            controlDescription.touched && controlDescription.errors?.required
+          "
+          class="field-error font-15"
+        >
+          Description is required
+        </div>
+      </div>
+    </div>
+
+    <button (click)="save()" type="submit" class="new-filled-submit">
+      Save
+    </button>
+  </form>
+</div>
