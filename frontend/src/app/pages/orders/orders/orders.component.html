@@ -1,1 +1,13 @@
-<p>orders works!</p>
+<div class="border-box layout vertical container">
+  <div *ngFor="let order of orders | async" class="layout vertical item">
+    <div class="font-24 w-500">Order - # {{ order._id }}</div>
+    <div (click)="getInoice(order._id)" class="font-20 w-500 classic-link">
+      Invoice
+    </div>
+    <div class="border-box layout vertical">
+      <div *ngFor="let p of order.products" class="product">
+        "{{ p.product.title }}" x {{ p.quantity }}
+      </div>
+    </div>
+  </div>
+</div>

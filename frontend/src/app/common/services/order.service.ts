@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { map } from "rxjs/operators";
 import { Observable } from "rxjs";
 
+
 import { API_ORDER } from "../api-routes";
 
 @Injectable()
@@ -20,7 +21,7 @@ export class OrderService {
   }
 
   public getInvoiceByOrderId(orderId: string): Observable<any> {
-    return this.http.get<any>(API_ORDER.GET_INVOICE_BY_ORDER_ID(orderId));
+    return this.http.get(API_ORDER.GET_INVOICE_BY_ORDER_ID(orderId), { responseType: 'blob' });
   }
 
   public makeOrder(stripe_token: string): Observable<any> {

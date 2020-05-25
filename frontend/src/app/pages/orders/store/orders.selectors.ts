@@ -9,17 +9,17 @@ const getOrderFeatureState: MemoizedSelector<
   IOrderState
 > = createFeatureSelector<IOrderState>("orderState");
 
-export const getCart: MemoizedSelector<IAppState, IOrder> = createSelector(
+export const getOrder: MemoizedSelector<IAppState, IMongoOrder[]> = createSelector(
   getOrderFeatureState,
   (state: IOrderState) => state.data
 );
 
-export const getCartLoading: MemoizedSelector<
+export const getOrderLoading: MemoizedSelector<
   IAppState,
   boolean
 > = createSelector(getOrderFeatureState, (state: IOrderState) => state.loading);
 
-export const getCartError: MemoizedSelector<IAppState, any> = createSelector(
+export const getOrderError: MemoizedSelector<IAppState, any> = createSelector(
   getOrderFeatureState,
   (state: IOrderState) => state.error
 );

@@ -1,0 +1,49 @@
+@import "new-global-variables";
+@import "new-color-palette";
+
+$add-button-width: 200px;
+$max-image-size: 250px;
+
+:host(app-orders) {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 50px;
+
+  .item {
+    padding: 25px;
+    background-color: $white;
+    margin-bottom: 25px;
+    box-shadow: $shadow-second;
+    transition: $transition;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $input-background-color;
+    }
+
+    & > * {
+      margin-bottom: 15px;
+    }
+
+    & > *:last-child {
+      margin-bottom: 0 !important;
+    }
+
+    .product {
+      padding: 10px;
+      border: $classic-button-border;
+      color: $main-color;
+      margin-bottom: 15px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
