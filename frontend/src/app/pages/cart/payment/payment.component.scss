@@ -1,0 +1,79 @@
+@import "spinner-animation";
+@import "success-animation";
+@import "new-global-variables";
+
+.checkout {
+  width: 90vw;
+  max-width: 500px;
+  color: #525252;
+
+  .close {
+    cursor: pointer;
+    z-index: 1;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 46px;
+    font-weight: 400;
+    line-height: 0.5;
+    color: #c8c7cc;
+    transform: rotate(45deg);
+    transition: 0.2s;
+
+    &:hover {
+      color: #949397;
+    }
+  }
+
+  .binding {
+    width: 100%;
+
+    .main-info {
+      width: 100%;
+      min-height: 90px;
+      margin-top: 10px;
+      margin-bottom: 50px;
+    }
+
+    .new-filled-submit {
+      min-width: 125px;
+    }
+  }
+
+  .info-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    transition: 2s;
+
+    .info-container-text {
+      margin: 15px 0;
+    }
+  }
+}
+
+.StripeElement {
+  margin: 1rem 0 1rem;
+  background-color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}

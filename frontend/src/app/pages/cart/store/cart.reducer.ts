@@ -33,6 +33,24 @@ export function cartReducer(
       };
     }
 
+    case CartActionTypes.REMOVE_PRODUCT_FROM_CART: {
+      let data: IMongoCart | null = state.data;
+
+      if (data && data.products) {
+        data = {
+          products: data.products.filter(
+            (item: IMongoCartItem) => item.productId._id !== action.payload
+          ),
+        };
+      }
+
+      return {
+        ...state,
+        loading: false,
+        data,
+      };
+    }
+
     default:
       return state;
   }

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import orderController from 'pdfkit';
-import STRIPE from 'stripe';
+import STRIPE, { Stripe } from 'stripe';
 import path from 'path';
 import fs from 'fs';
 
@@ -60,16 +60,19 @@ export const getOrderById = (
         });
 };
 
-// TODO: udpate post order when frontend logic will be completed
 export const postOrder = (
     req: Request<any>,
     res: Response<any>,
     next: NextFunction
 ) => {
     const userId: string = (req as any).userId;
+    const stripeToken: string = req.body.stripe_token;
 
+    let certainUser: IUser;
     let products: any;
-    let total: number = 0;
+    let amount: number = 0;
+    let metadata: Record<string, string | number | null> = {};
+    let prodsForOrder;
 
     User.findById(userId)
         .then((user: IUser) => {
@@ -78,12 +81,19 @@ export const postOrder = (
                 errorMessage: `User with id: ${userId} not found.`,
                 errorCode: 404,
             });
-
+            certainUser = user;
             return user.populate('cart.items.productId').execPopulate();
         })
         .then((user) => {
+            prodsForOrder = user.cart.items.map((i) => {
+                return {
+                    quantity: i.quantity,
+                    product: { ...(i.productId as any)._doc },
+                };
+            });
+
             products = user.cart.items;
-            total = 0;
+            amount = 0;
 
             customCheck({
                 check: !!products.length,
@@ -91,39 +101,35 @@ export const postOrder = (
                 errorCode: 400,
             });
 
-            products.forEach((p) => {
-                total += p.quantity * p.productId.price;
+            products.forEach((p, index) => {
+                const key: string = `${index}_item`;
+                metadata[
+                    key
+                ] = `${p.productId.title}: ${p.productId.price}$ x ${p.quantitys}`;
+                amount += p.quantity * p.productId.price * 100;
             });
 
-            // TOOD: change logic to make charge on back
-            return stripe.checkout.sessions.create({
-                payment_method_types: ['card'],
-                line_items: products.map((p) => {
-                    return {
-                        name: p.productId.title,
-                        description: p.productId.description,
-                        amount: p.productId.price * 100,
-                        currency: 'usd',
-                        quantity: p.quantity,
-                    };
-                }),
-                success_url:
-                    req.protocol +
-                    '://' +
-                    req.get('host') +
-                    '/checkout/success', // => http://localhost:3000
-                cancel_url:
-                    req.protocol + '://' + req.get('host') + '/checkout/cancel',
+            return stripe.charges.create({
+                currency: 'usd',
+                amount,
+                receipt_email: user.email,
+                source: stripeToken,
+                metadata,
             });
         })
-        .then((session) => {
-            res.json({
-                path: '/checkout',
-                pageTitle: 'Checkout',
-                products,
-                totalSum: total,
-                sessionId: session.id,
+        .then((res: Stripe.Charge) => {
+            const order = new Order({
+                user: {
+                    email: certainUser.email,
+                    userId: certainUser,
+                },
+                products: prodsForOrder,
             });
+            return order.save();
+        })
+        .then((result) => {
+            certainUser.clearCart();
+            res.json({ message: 'Success' });
         })
         .catch((err) => {
             const error = new Error(err);

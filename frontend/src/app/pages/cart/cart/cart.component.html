@@ -1,14 +1,59 @@
-<div *ngIf="cart | async as cart$" class="layout vertical border-box container">
+<div
+  *ngIf="cart | async as cart$"
+  class="relative layout vertical border-box container"
+>
+  <app-loading *ngIf="loading | async"></app-loading>
+
   <div
-    *ngFor="let product of cart$.products"
-    class="layout vertical center-cetner item"
+    *ngIf="!cart$.products.length"
+    class="border-box layout vertical center-center empty"
   >
-    <div class="font-24 w-500">{{ product.productId.title }}</div>
-    <img
-      *ngIf="product.productId.imageUrl"
-      [src]="'http://localhost:3000/' + product.productId.imageUrl"
-      class="image"
-    />
-    <div>{{ product.productId.price | currency }} x {{ product.quantity }}</div>
+    <div class="font-42 w-600">Your cart is empty!</div>
+    <a [routerLink]="['/products']" class="font-32 w-600 classic-link">
+      Let's go shopping!
+    </a>
+  </div>
+
+  <div *ngIf="cart$.products.length" class="layout horizontal header">
+    <button
+      (click)="payForTheOrder()"
+      type="submit"
+      class="border-box font-13 new-filled-submit"
+    >
+      PAY FOR ORDER
+    </button>
+  </div>
+
+  <div *ngIf="cart$.products.length" class="layout vertical list">
+    <div
+      *ngFor="let product of cart$.products"
+      class="layout horizontal center-cetner item"
+    >
+      <div *ngIf="!product.productId.imageUrl" class="image"></div>
+      <img
+        *ngIf="product.productId.imageUrl"
+        [src]="'http://localhost:3000/' + product.productId.imageUrl"
+        class="image"
+      />
+      <div class="flex-1 layout vertical info">
+        <div class="font-24 w-500">{{ product.productId.title }}</div>
+        <div class="font-18 w-700">
+          {{ product.productId.price | currency }} x {{ product.quantity }} =
+          {{ product.quantity * product.productId.price | currency }}
+        </div>
+        <div class="flex-1 layout horizonts description">
+          {{ product.productId.description }}
+        </div>
+      </div>
+      <div class="layout vertical action">
+        <button
+          (click)="removeProductFromCart(product.productId)"
+          type="submit"
+          class="border-box font-13 new-filled-cancel"
+        >
+          Remove from cart
+        </button>
+      </div>
+    </div>
   </div>
 </div>

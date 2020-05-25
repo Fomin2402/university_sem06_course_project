@@ -18,7 +18,7 @@ export interface IUser extends mongoose.Document {
 
     addToCart: (product: IProduct) => any;
     removeFromCart: (productId: string) => any;
-    clearCart: (product: IProduct) => any;
+    clearCart: () => any;
 }
 
 const userSchema = new Schema({

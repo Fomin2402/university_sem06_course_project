@@ -23,7 +23,7 @@ export class OrderService {
     return this.http.get<any>(API_ORDER.GET_INVOICE_BY_ORDER_ID(orderId));
   }
 
-  public makeOrder(): Observable<any> {
-    return this.http.post<any>(API_ORDER.POST_ORDER, null);
+  public makeOrder(stripe_token: string): Observable<any> {
+    return this.http.post<any>(API_ORDER.POST_ORDER, { stripe_token });
   }
 }
