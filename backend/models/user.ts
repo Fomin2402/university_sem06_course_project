@@ -73,7 +73,6 @@ userSchema.methods.addToCart = function (product: IProduct) {
     return this.save();
 };
 
-// TODO: add minus onee logic
 userSchema.methods.removeFromCart = function (productId: string) {
     const updatedCartItems: ICartItem[] = this.cart.items.filter(
         (item: ICartItem) => {

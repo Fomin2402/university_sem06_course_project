@@ -11,22 +11,14 @@ import { getUserIsAdmin } from "src/app/store/selectors";
 })
 export class SidebarComponent implements OnDestroy, OnInit {
   icon: Record<string, string> = {
-    homes: "assets/icons/home.svg",
-    activeHomes: "assets/icons/home-active.svg",
-    apps: "assets/icons/appointments.svg",
-    activeApps: "assets/icons/appointments-active.svg",
-    messages: "assets/icons/chat.svg",
-    activeMessages: "assets/icons/active-main-chat.svg",
-    agentMessages: "assets/icons/agents-chat.svg",
-    activeAgentMessages: "assets/icons/active-agents-chat.svg",
-    agents: "assets/icons/agents.svg",
-    activeAgents: "assets/icons/agents-active.svg",
-    clients: "assets/icons/clients.svg",
-    activeClients: "assets/icons/clients-active.svg",
-    settings: "assets/icons/settings.svg",
-    activeSettings: "assets/icons/settings-active.svg",
-    payment: "assets/icons/payment.svg",
-    activePayment: "assets/icons/payment-active.svg",
+    homes: "assets/icons/list.svg",
+    activeHomes: "assets/icons/list.svg",
+    apps: "assets/icons/shopping-bag.svg",
+    activeApps: "assets/icons/shopping-bag.svg",
+    messages: "assets/icons/dollar-sign.svg",
+    activeMessages: "assets/icons/dollar-sign.svg",
+    clients: "assets/icons/user.svg",
+    activeClients: "assets/icons/user.svg",
   };
   isUserAdmin!: boolean;
   hideSidebar: boolean = true;

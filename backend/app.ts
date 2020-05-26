@@ -78,10 +78,6 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/blablabla', (req, res, next) => {
-    res.end('blablabla');
-});
-
 app.use(authRoutes);
 app.use('/admin', adminRoutes);
 app.use('/product', producRoutes);
